@@ -11,22 +11,10 @@
 #include "GameScene.h"
 #include "..\8\Panel.h"
 
-<<<<<<< HEAD
-class Player;
-class Panel;
-
-class GamePlay : public Game
-{
-private:
-	Panel* m_panel;
-	Player* m_player;
-
-=======
 class GamePlay : public GameScene
 {
 private:
 	Panel m_panel;
->>>>>>> GamePlay
 public:
 	GamePlay();
 	~GamePlay();

@@ -20,17 +20,11 @@ class Game
 private:
 
 public:
-<<<<<<< HEAD
-
-    Game();
-	~Game() {};
-=======
 	int a;
 	int m_Scene;
 
     Game();
 	~Game();
->>>>>>> GamePlay
 
     // Initialization and management
     void Initialize(HWND window, int width, int height);
