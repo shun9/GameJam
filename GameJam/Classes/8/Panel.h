@@ -36,6 +36,14 @@ private:
 	//‚P•Ó‚Ì‘å‚«‚³
 	static int SIZE;
 
+	//ƒpƒX‚Ìˆê——
+	static PanelPass passTopRight;
+	static PanelPass passTopLeft;
+	static PanelPass passBottomRight;
+	static PanelPass passBottomLeft;
+	static PanelPass passRightLeft;
+	static PanelPass passTopBottom;
+	static PanelPass passNone;
 
 
 	/*--•Ï”--*/
