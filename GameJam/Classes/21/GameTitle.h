@@ -8,22 +8,14 @@
 
 #include "..\..\StepTimer.h"
 #include "GameScene.h"
-#include "..\8\Panel.h"
 
-class GamePlay : public GameScene
+class GameTitle : public GameScene
 {
 private:
-	Panel m_panel;
 public:
-	GamePlay();
-	~GamePlay();
+	GameTitle();
+	~GameTitle();
 
 	void Update();
 	void Render();
-
-	void StageMove();
-	void PaneFit();
-	void PanelSlide();
-	void CheckGame();
-	void GameOver();
 };

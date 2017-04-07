@@ -8,18 +8,38 @@
 #include "..\..\Game.h"
 #include "GamePlay.h"
 
-void StageMove()
+GamePlay::GamePlay()
 {
 }
 
-void PaneFit()
+GamePlay::~GamePlay()
 {
 }
 
-void PanelSlide()
+void GamePlay::Update()
 {
 }
 
-void GameOver()
+void GamePlay::Render()
+{
+}
+
+void GamePlay::StageMove()
+{
+}
+
+void GamePlay::PaneFit()
+{
+}
+
+void GamePlay::PanelSlide()
+{
+}
+
+void GamePlay::CheckGame()
+{
+}
+
+void GamePlay::GameOver()
 {
 }
