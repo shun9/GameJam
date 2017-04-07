@@ -37,7 +37,9 @@ void Game::Initialize(HWND window, int width, int height)
     m_timer.SetFixedTimeStep(true);
     m_timer.SetTargetElapsedSeconds(1.0 / 60);
     */
-	m_panel = new Panel(m_d3dDevice, m_d3dContext,L"gorogoro (2).png");
+	m_panel = new Panel(m_d3dDevice, m_d3dContext, L"Resources\\gorogoro (2).png", PanelPass{true,true,false,false});
+	m_panel2 = new Panel(m_d3dDevice, m_d3dContext, L"Resources\\gorogoro (2).png", PanelPass{ false, true,false, true });
+	m_panel->Register(m_panel2, RIGHT);
 }
 
 // Executes the basic game loop.
@@ -63,6 +65,7 @@ void Game::Update(DX::StepTimer const& timer)
     // TODO: Add your game logic here.
 	//ここから下に記述
     elapsedTime;
+	bool tmp = m_panel->CanPass(BOTTOM);
 }
 
 //＋ーーーーーーーーーーーーーー＋
@@ -84,7 +87,8 @@ void Game::Render()
 	//ここから下に記述
 
 
-	m_panel->Draw(100.0f,100.0f);
+	m_panel->Draw(100.0f, 100.0f);
+	m_panel2->Draw(100.0f, 250.0f);
 
 	//ここから上に記述
 	Present();
