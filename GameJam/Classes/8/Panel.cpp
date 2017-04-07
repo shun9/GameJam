@@ -11,6 +11,16 @@ using namespace DirectX;
 //１辺の大きさ
 int Panel::SIZE = 64;
 
+//パス一覧
+PanelPass Panel::passTopRight    = { true,false,false,true };
+PanelPass Panel::passTopLeft     = { true,false,true,false };
+PanelPass Panel::passBottomRight = { true,false,true,false };
+PanelPass Panel::passBottomLeft  = { true,false,true,false };
+PanelPass Panel::passRightLeft   = { false,false,true,true };
+PanelPass Panel::passTopBottom   = { true,true,false,false };
+PanelPass Panel::passNone        = { false,false,false,false };
+
+
 //＋ーーーーーーーーーーーーーー＋
 //｜機能  :コンストラクタ
 //｜引数  :デバイス				(ComPtr<ID3D11Device>)
@@ -30,10 +40,10 @@ Panel::Panel(Microsoft::WRL::ComPtr<ID3D11Device> device
 
 
 	//道がある方向を設定
-	m_canPass[TOP] = pass.top;
+	m_canPass[TOP]    = pass.top;
 	m_canPass[BOTTOM] = pass.bottom;
-	m_canPass[LEFT] = pass.left;
-	m_canPass[RIGHT] = pass.right;
+	m_canPass[LEFT]   = pass.left;
+	m_canPass[RIGHT]  = pass.right;
 
 	//隣接するパネル
 	for (int i = 0; i < 4; i++)
