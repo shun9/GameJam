@@ -13,14 +13,11 @@
 class Game
 {
 private:
-	Panel* m_panel;
-	Panel* m_panel2;
 
 public:
-	int a;
 
     Game();
-	~Game() { delete m_panel; delete m_panel2; };
+	~Game() {};
 
     // Initialization and management
     void Initialize(HWND window, int width, int height);
