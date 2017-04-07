@@ -12,6 +12,7 @@
 class Game
 {
 public:
+	int a;
 
     Game();
 

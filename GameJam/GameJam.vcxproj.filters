@@ -5,16 +5,28 @@
       <UniqueIdentifier>13ecb2e6-20d8-4ec4-8773-b3dd73423ca3</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dds;dlg;fbx;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tga;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Classes">
+      <UniqueIdentifier>{0f44847d-f45a-4dec-8b09-c6fd4f8a3019}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\8">
+      <UniqueIdentifier>{90fb4461-5460-4a54-b6a3-20ddd0d3859d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="StepTimer.h" />
+    <ClInclude Include="Classes\8\Panel.h">
+      <Filter>Classes\8</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Classes\8\Panel.cpp">
+      <Filter>Classes\8</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
