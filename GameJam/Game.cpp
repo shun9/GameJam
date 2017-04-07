@@ -60,6 +60,8 @@ void Game::Update(DX::StepTimer const& timer)
 
     // TODO: Add your game logic here.
 	//ここから下に記述
+
+	//ここから上に記述
     elapsedTime;
 }
 

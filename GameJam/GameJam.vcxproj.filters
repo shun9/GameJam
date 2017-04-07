@@ -11,6 +11,9 @@
     <Filter Include="Classes\8">
       <UniqueIdentifier>{90fb4461-5460-4a54-b6a3-20ddd0d3859d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\21">
+      <UniqueIdentifier>{45bb07b6-2b15-4191-a6b8-a77706bce715}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -19,6 +22,9 @@
     <ClInclude Include="Classes\8\Panel.h">
       <Filter>Classes\8</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\21\GamePlay.h">
+      <Filter>Classes\21</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -26,6 +32,9 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Classes\8\Panel.cpp">
       <Filter>Classes\8</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\21\GamePlay.cpp">
+      <Filter>Classes\21</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
