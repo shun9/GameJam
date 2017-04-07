@@ -4,6 +4,8 @@
 
 #include "pch.h"
 #include "Game.h"
+#include "Classes\21\GamePlay.h"
+#include "Classes\21\GameTitle.h"
 
 
 extern void ExitGame();
@@ -12,12 +14,19 @@ using namespace DirectX;
 
 using Microsoft::WRL::ComPtr;
 
+GameScene* m_GameScene;
+
 Game::Game() :
     m_window(0),
     m_outputWidth(800),
     m_outputHeight(600),
     m_featureLevel(D3D_FEATURE_LEVEL_9_1)
 {
+}
+
+Game::~Game()
+{
+	delete m_GameScene;
 }
 
 // Initialize the Direct3D resources required to run.
@@ -31,6 +40,8 @@ void Game::Initialize(HWND window, int width, int height)
 
     CreateResources();
 
+	m_Scene = TITLE;
+	m_GameScene = new GameTitle();
     // TODO: Change the timer settings if you want something other than the default variable timestep mode.
     // e.g. for 60 FPS fixed timestep update logic, call:
     /*
@@ -61,6 +72,23 @@ void Game::Update(DX::StepTimer const& timer)
 
     // TODO: Add your game logic here.
 	//ここから下に記述
+
+	//シーン管理
+	if (m_GameScene->m_next != m_Scene)
+	{
+		m_Scene = m_GameScene->m_next;
+		//シーン削除
+		delete m_GameScene;
+		m_GameScene = nullptr;
+		switch (m_Scene)
+		{
+		case TITLE:m_GameScene = new GameTitle();
+			break;
+		case PLAY:m_GameScene = new GamePlay();
+			break;
+		}
+	}
+	m_GameScene->Update();
 
 	//ここから上に記述
     elapsedTime;

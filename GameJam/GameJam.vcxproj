@@ -155,6 +155,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Classes\21\GamePlay.h" />
+    <ClInclude Include="Classes\21\GameScene.h" />
+    <ClInclude Include="Classes\21\GameTitle.h" />
     <ClInclude Include="Classes\8\Panel.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="pch.h" />
@@ -162,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\21\GamePlay.cpp" />
+    <ClCompile Include="Classes\21\GameTitle.cpp" />
     <ClCompile Include="Classes\8\Panel.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />

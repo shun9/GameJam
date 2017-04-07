@@ -7,6 +7,11 @@
 #include "StepTimer.h"
 #include "Classes\8\Panel.h"
 
+enum SCENE
+{
+	TITLE,
+	PLAY,
+};
 
 // A basic game implementation that creates a D3D11 device and
 // provides a game loop.
@@ -15,9 +20,17 @@ class Game
 private:
 
 public:
+<<<<<<< HEAD
 
     Game();
 	~Game() {};
+=======
+	int a;
+	int m_Scene;
+
+    Game();
+	~Game();
+>>>>>>> GamePlay
 
     // Initialization and management
     void Initialize(HWND window, int width, int height);
