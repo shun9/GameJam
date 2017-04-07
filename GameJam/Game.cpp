@@ -49,16 +49,25 @@ void Game::Tick()
     Render();
 }
 
-// Updates the world.
+//＋ーーーーーーーーーーーーーー＋
+//｜機能  :更新処理
+//｜引数  :タイマーだと思う(StepTimer)
+//｜戻り値:なし(void)
+//＋ーーーーーーーーーーーーーー＋
 void Game::Update(DX::StepTimer const& timer)
 {
     float elapsedTime = float(timer.GetElapsedSeconds());
 
     // TODO: Add your game logic here.
+	//ここから下に記述
     elapsedTime;
 }
 
-// Draws the scene.
+//＋ーーーーーーーーーーーーーー＋
+//｜機能  :描画処理
+//｜引数  :なし(void)
+//｜戻り値:なし(void)
+//＋ーーーーーーーーーーーーーー＋
 void Game::Render()
 {
     // Don't try to render anything before the first Update.
@@ -70,8 +79,13 @@ void Game::Render()
     Clear();
 
     // TODO: Add your rendering code here.
+	//ここから下に記述
 
-    Present();
+
+
+
+	//ここから上に記述
+	Present();
 }
 
 // Helper method to clear the back buffers.
