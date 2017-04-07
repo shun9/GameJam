@@ -3,7 +3,7 @@
 #include"..\..\StepTimer.h"
 #include "..\8\Panel.h"
 
-class GamePlay
+class GamePlay : public Game
 {
 private:
 	Panel m_panel;
