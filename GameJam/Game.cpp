@@ -37,8 +37,8 @@ void Game::Initialize(HWND window, int width, int height)
     m_timer.SetFixedTimeStep(true);
     m_timer.SetTargetElapsedSeconds(1.0 / 60);
     */
-	m_panel = new Panel(m_d3dDevice, m_d3dContext, L"Resources\\gorogoro (2).png", PanelPass{true,true,false,false});
-	m_panel2 = new Panel(m_d3dDevice, m_d3dContext, L"Resources\\gorogoro (2).png", PanelPass{ false, true,false, true });
+	m_panel = new Panel(m_d3dDevice, m_d3dContext, L"Resources\\Road2.png", PanelPass{true,true,false,false});
+	m_panel2 = new Panel(m_d3dDevice, m_d3dContext, L"Resources\\Road5.png", PanelPass{ false, true,false, true });
 	m_panel->Register(m_panel2, RIGHT);
 }
 
