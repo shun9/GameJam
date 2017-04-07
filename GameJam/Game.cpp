@@ -5,6 +5,7 @@
 #include "pch.h"
 #include "Game.h"
 
+
 extern void ExitGame();
 
 using namespace DirectX;
@@ -36,6 +37,7 @@ void Game::Initialize(HWND window, int width, int height)
     m_timer.SetFixedTimeStep(true);
     m_timer.SetTargetElapsedSeconds(1.0 / 60);
     */
+	m_panel = new Panel(m_d3dDevice, m_d3dContext,L"gorogoro (2).png");
 }
 
 // Executes the basic game loop.
@@ -82,7 +84,7 @@ void Game::Render()
 	//ここから下に記述
 
 
-
+	m_panel->Draw(100.0f,100.0f);
 
 	//ここから上に記述
 	Present();

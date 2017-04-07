@@ -5,16 +5,21 @@
 #pragma once
 
 #include "StepTimer.h"
+#include "Classes\8\Panel.h"
 
 
 // A basic game implementation that creates a D3D11 device and
 // provides a game loop.
 class Game
 {
+private:
+	Panel* m_panel;
+
 public:
 	int a;
 
     Game();
+	~Game() { delete m_panel; };
 
     // Initialization and management
     void Initialize(HWND window, int width, int height);

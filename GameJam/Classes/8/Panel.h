@@ -5,7 +5,9 @@
 //* @author:S.Katou
 //************************************************/
 #pragma once
-
+#include <SpriteBatch.h>
+#include <wrl.h>
+#include "WICTextureLoader.h"
 
 class Panel
 {
@@ -19,6 +21,11 @@ private:
 	/*--変数--*/
 private:
 	//画像データ
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_texture;
+
+	//スプライト描画に必須
+	std::unique_ptr<DirectX::SpriteBatch> m_sprite;
+
 
 	//上下左右に接しているパネルのポインタ
 	//Panel*
@@ -29,11 +36,19 @@ private:
 
 	/*--関数--*/
 public:
-	Panel() {}
-	~Panel() {}
+	Panel(Microsoft::WRL::ComPtr<ID3D11Device> device
+	, Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContext
+	, const wchar_t* path);
+
+	~Panel() {
+		m_sprite.reset();
+
+
+		m_texture.Reset();
+	}
 
 	//描画
-	void Draw();
+	void Draw(float x, float y);
 
 	//指定方向に接しているパネルを登録
 	void Register(Panel* panel);
