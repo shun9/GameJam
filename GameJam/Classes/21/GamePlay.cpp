@@ -1,20 +1,25 @@
+//--------------------------------------------------------------------------------------
+// File: GamePlay.cpp
+// Date: 2017.04.07
+// Author: Syuto Yamada
+//--------------------------------------------------------------------------------------
 
 #include "..\..\pch.h"
 #include "..\..\Game.h"
 #include "GamePlay.h"
 
-GamePlay::GamePlay()
+void StageMove()
 {
 }
 
-GamePlay::~GamePlay()
+void PaneFit()
 {
 }
 
-void GamePlay::Update()
+void PanelSlide()
 {
 }
 
-void GamePlay::Render()
+void GameOver()
 {
 }
