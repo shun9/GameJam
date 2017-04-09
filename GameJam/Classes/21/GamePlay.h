@@ -14,7 +14,7 @@
 class GamePlay : public GameScene
 {
 private:
-	Panel m_panel;
+	//Panel m_panel;
 public:
 	GamePlay();
 	~GamePlay();

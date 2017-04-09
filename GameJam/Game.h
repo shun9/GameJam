@@ -18,6 +18,7 @@ enum SCENE
 class Game
 {
 private:
+	Panel* m_panel;
 
 public:
 	int a;

@@ -27,6 +27,8 @@ Game::Game() :
 Game::~Game()
 {
 	delete m_GameScene;
+
+	delete m_panel;
 }
 
 // Initialize the Direct3D resources required to run.
@@ -48,6 +50,7 @@ void Game::Initialize(HWND window, int width, int height)
     m_timer.SetFixedTimeStep(true);
     m_timer.SetTargetElapsedSeconds(1.0 / 60);
     */
+	m_panel = new Panel(m_d3dDevice, m_d3dContext, Panel::GetRandomPass());
 }
 
 // Executes the basic game loop.
@@ -111,6 +114,8 @@ void Game::Render()
 
     // TODO: Add your rendering code here.
 	//ここから下に記述
+
+	m_panel->Draw(100.0f,100.0f);
 
 	//ここから上に記述
 	Present();
