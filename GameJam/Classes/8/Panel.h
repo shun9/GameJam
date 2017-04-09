@@ -32,7 +32,7 @@ struct PanelPass
 class Panel
 {
 	/*--Ã“I•Ï”--*/
-private:
+public:
 	//‚P•Ó‚Ì‘å‚«‚³
 	static int SIZE;
 
