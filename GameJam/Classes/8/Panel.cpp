@@ -7,6 +7,7 @@
 #include "Panel.h"
 
 #include <random>
+#include <SimpleMath.h>
 
 using namespace DirectX;
 
@@ -123,7 +124,8 @@ void Panel::Draw(float x, float y)
 {
 	m_sprite->Begin();
 
-	m_sprite->Draw(m_texture.Get(), XMFLOAT2(x, y), nullptr, Colors::White);
+	//描画　128.0fは元画像のサイズです
+	m_sprite->Draw(m_texture.Get(), XMFLOAT2(x, y), nullptr, Colors::White, 0.0f, XMFLOAT2(0.0f, 0.0f), SIZE / 128.0f);
 
 	m_sprite->End();
 }
