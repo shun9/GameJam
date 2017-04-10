@@ -82,6 +82,9 @@ GamePlay::~GamePlay()
 //＋ーーーーーーーーーーーーーー＋
 void GamePlay::Update()
 {
+	//ゲーム進行中の処理
+	if (!m_isGameOver)
+	{
 	//マウス更新
 	m_mouse->Update();
 
@@ -103,6 +106,15 @@ void GamePlay::Update()
 	//プレイヤーの更新
 	UpdatePlayer();
 
+	//ゲームオーバー判定
+	m_isGameOver = IsDead();
+	}
+
+	//ゲームオーバー中の処理
+	if (m_isGameOver)
+	{
+		GameOver();
+	}
 }
 
 //＋ーーーーーーーーーーーーーー＋
@@ -190,13 +202,13 @@ void GamePlay::UpdateOption()
 //＋ーーーーーーーーーーーーーー＋
 void GamePlay::UpdatePlayer()
 {
-	m_player->Update();
-
 	DirectX::SimpleMath::Vector2 pos = m_player->getPos();
 	int x = (pos.x + m_scrollPos - MAP_POS_X) / Panel::SIZE;
 	int y = (pos.y - MAP_POS_Y) / Panel::SIZE;
 
 	m_player->registerPanel(m_panel[y][x]);
+
+	m_player->Update();
 }
 
 
@@ -271,11 +283,16 @@ bool GamePlay::IsDead()
 {
 	DirectX::SimpleMath::Vector2 pos = m_player->getPos();
 
-	if (pos.x < -Panel::SIZE / 2)
+	//画面左端、上端、下端に出たらゲームオーバー
+	if (pos.x < -Panel::SIZE / 2
+	||  pos.y < -Panel::SIZE / 2 + MAP_POS_Y
+	||  pos.y >  Panel::SIZE * MAP_Y + Panel::SIZE / 2)
 	{
-
+		return true;
 	}
 	return 0;
+
+	return false;
 }
 
 void GamePlay::GameOver()
