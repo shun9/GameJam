@@ -62,6 +62,15 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11Device> m_device;
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> m_context;
 
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_result;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_result2;
+
+	//スプライト描画
+	std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;
+
+	DirectX::SimpleMath::Vector2 m_resultPos;
+	DirectX::SimpleMath::Vector2 m_resultPos2;
+
 	//スコア
 	int m_score;
 
