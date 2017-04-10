@@ -6,6 +6,8 @@
 
 #include "../../pch.h"
 #include "GameTitle.h"
+#include "..\8\ADX2Le.h"
+#include "..\..\Sounds\GamePlaySounds.h"
 
 using namespace DirectX;
 using namespace SimpleMath;
@@ -13,6 +15,9 @@ using namespace SimpleMath;
 GameTitle::GameTitle(Microsoft::WRL::ComPtr<ID3D11Device> device
 	, Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContext)
 {
+	//BGMÄ¶
+	ADX2Le::Play(CRI_GAMEPLAYSOUNDS__CUE_ID_1);
+
 	m_next = TITLE;
 	m_mouse = MouseManager::GetInstance();
 
@@ -44,6 +49,10 @@ void GameTitle::Update()
 	m_mouse->Update();
 	if (m_mouse->IsClickedLeft())
 	{
+		if (m_next != PLAY)
+		{
+			ADX2Le::Play(CRI_GAMEPLAYSOUNDS__CUE_ID_4);
+		}
 		m_next = PLAY;
 	}
 }
