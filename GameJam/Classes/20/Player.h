@@ -9,11 +9,7 @@
 #include "SpriteBatch.h"
 #include "WICTextureLoader.h"
 #include <wrl.h>
-<<<<<<< HEAD
 #include "..\8\Panel.h"
-=======
-#include "../8/Panel.h"
->>>>>>> 33cf137ad88dc2d60e5d131307422f78894dae9a
 
 class Player
 {
