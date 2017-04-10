@@ -25,7 +25,7 @@ GamePlay::GamePlay()
 				m_panel[j][i] = new Panel(m_d3dDevice, m_d3dContext,
 					Panel::GetRandomPass());
 			}
-			m_panel[j][i]->Draw();
+			//m_panel[j][i]->Draw();
 		}	
 	}
 	m_timer.SetFixedTimeStep(true);
