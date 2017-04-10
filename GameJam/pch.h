@@ -39,6 +39,7 @@
 #include <exception>
 #include <memory>
 #include <stdexcept>
+#include <Mouse.h>
 
 namespace DX
 {

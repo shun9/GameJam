@@ -7,7 +7,7 @@
 #include "StepTimer.h"
 #include "Classes\8\Panel.h"
 
-enum SCENE
+enum
 {
 	TITLE,
 	PLAY,
@@ -70,6 +70,8 @@ private:
     Microsoft::WRL::ComPtr<IDXGISwapChain1>         m_swapChain1;
     Microsoft::WRL::ComPtr<ID3D11RenderTargetView>  m_renderTargetView;
     Microsoft::WRL::ComPtr<ID3D11DepthStencilView>  m_depthStencilView;
+
+	std::unique_ptr<DirectX::Mouse> m_mouse;
 
     // Rendering loop timer.
     DX::StepTimer                                   m_timer;

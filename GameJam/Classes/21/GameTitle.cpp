@@ -9,7 +9,7 @@
 
 GameTitle::GameTitle()
 {
-	m_next = 0;
+	m_next = TITLE;
 }
 
 GameTitle::~GameTitle()
@@ -18,6 +18,11 @@ GameTitle::~GameTitle()
 
 void GameTitle::Update()
 {
+	auto state = m_mouse->GetState();
+	if (state.leftButton)
+	{
+		m_next = PLAY;
+	}
 }
 
 void GameTitle::Render()

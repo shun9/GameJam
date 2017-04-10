@@ -36,18 +36,20 @@ void Game::Initialize(HWND window, int width, int height)
     m_outputWidth = std::max(width, 1);
     m_outputHeight = std::max(height, 1);
 
+	m_timer.SetFixedTimeStep(true);
+	m_timer.SetTargetElapsedSeconds(1.0 / 60);
+
+	srand(static_cast<unsigned int>(NULL));
+
     CreateDevice();
 
     CreateResources();
 
 	m_Scene = TITLE;
 	m_GameScene = new GameTitle();
-    // TODO: Change the timer settings if you want something other than the default variable timestep mode.
-    // e.g. for 60 FPS fixed timestep update logic, call:
-    /*
-    m_timer.SetFixedTimeStep(true);
-    m_timer.SetTargetElapsedSeconds(1.0 / 60);
-    */
+
+	m_mouse = std::make_unique<Mouse>();
+	m_mouse->SetWindow(window);
 }
 
 // Executes the basic game loop.

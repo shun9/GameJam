@@ -7,6 +7,7 @@
 #pragma once
 
 #include"..\..\StepTimer.h"
+#include"..\..\Game.h"
 
 class GameScene
 {
