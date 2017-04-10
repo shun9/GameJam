@@ -157,7 +157,7 @@ bool Panel::CanPass(int direction)
 	}
 
 
-	//指定方向にパネルが無ければそのまま進める
+	//指定方向にパネルが無ければ進めない
 	if (m_linkPanel[direction] == nullptr)
 	{
 		return true;

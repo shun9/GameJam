@@ -11,7 +11,7 @@
 #include "..\8\ADX2Le.h"
 #include "..\..\Sounds\GamePlaySounds.h"
 
-using namespace DirectX;
+
 using namespace std;
 
 const int GamePlay::MAP_Y             = 3;
@@ -35,7 +35,7 @@ GamePlay::GamePlay(Microsoft::WRL::ComPtr<ID3D11Device> device
 	, m_scrollPos(0)
 	, m_numChoosed(-1)
 	, m_score(0)
-	, m_isGameover(false)
+	, m_isGameOver(false)
 {	
 
 	//次のシーン
@@ -43,9 +43,6 @@ GamePlay::GamePlay(Microsoft::WRL::ComPtr<ID3D11Device> device
 
 	//マウスの取得
 	m_mouse = MouseManager::GetInstance();
-
-	m_spriteBatch = std::make_unique<SpriteBatch>(m_context.Get());
-	CreateWICTextureFromFile(m_device.Get(), L"Resources\\BacktoTitle.png", nullptr, m_result.ReleaseAndGetAddressOf());
 
 	//ステージの作成
 	CreateStage();
@@ -81,19 +78,15 @@ void GamePlay::Update()
 {
 	//マウス更新
 	m_mouse->Update();
-
+	
 	//ゲーム進行中の処理
 	if (!m_isGameOver)
 	{
+
 	//マウスの座標を更新 間に挟むため半分ずらす
 	m_mousePosX = (m_mouse->GetPosX() + m_scrollPos+ (Panel::SIZE / 2) - MAP_POS_X) / Panel::SIZE ;
 	m_mousePosY = (m_mouse->GetPosY()-MAP_POS_Y) / Panel::SIZE;
 
-	if (m_isGameover)
-	{
-		GameOver();
-		return;
-	}
 	//ステージ移動
 	UpdateStage();
 
@@ -103,6 +96,15 @@ void GamePlay::Update()
 	//プレイヤーの更新
 	UpdatePlayer();
 
+	//ゲームオーバー判定
+	m_isGameOver = IsDead();
+	}
+
+	//ゲームオーバー中の処理
+	if (m_isGameOver)
+	{
+		GameOver();
+	}
 }
 
 //＋ーーーーーーーーーーーーーー＋
@@ -120,11 +122,6 @@ void GamePlay::Render()
 
 	//プレイヤー描画
 	m_player->Render();
-
-	if (m_isGameover)
-	{
-
-	}
 }
 
 //＋ーーーーーーーーーーーーーー＋
@@ -259,7 +256,12 @@ void GamePlay::PanelSlide()
 	LinkPanel();
 }
 
-void GamePlay::CheckGame()
+//＋ーーーーーーーーーーーーーー＋
+//｜機能  :ゲームオーバー判定
+//｜引数  :なし(void)
+//｜戻り値:ゲームオーバーでtrue(bool)
+//＋ーーーーーーーーーーーーーー＋
+bool GamePlay::IsDead()
 {
 	DirectX::SimpleMath::Vector2 pos = m_player->getPos();
 
@@ -277,10 +279,7 @@ void GamePlay::CheckGame()
 
 void GamePlay::GameOver()
 {
-	if (m_mouse->IsClickedLeft())
-	{
-		m_next = TITLE;
-	}
+	m_next = TITLE;
 }
 
 //＋ーーーーーーーーーーーーーー＋

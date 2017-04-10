@@ -59,8 +59,6 @@ Player::~Player()
 void Player::Update()
 {
 	work();
-	m_pos.x -= 0.1f;
-
 }
 
 //----------------------------------------------------------------------
@@ -116,7 +114,7 @@ void Player::work()
 	if (m_state == false)
 	{
 		//“®‚¯‚é‚©‚Ç‚¤‚©‚ðŠm”F
-		for (int direction = 0; direction < 4; direction++)
+		for (int direction = 0; direction < 6; direction++)
 		{
 			if (isWork(direction))
 			{

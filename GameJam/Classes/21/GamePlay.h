@@ -5,10 +5,12 @@
 //--------------------------------------------------------------------------------------
 
 #pragma once
+#include <vector>
 #include "GameScene.h"
-#include "SpriteBatch.h"
 #include "..\8\Panel.h"
+
 #include "../8/MouseManager.h"
+
 #include "../20/Player.h"
 
 struct OPTION
@@ -60,15 +62,11 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11Device> m_device;
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> m_context;
 
-	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_result;
-	//スプライト描画
-	std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;
-	DirectX::SimpleMath::Vector2 m_resultorigin;
-
 	//スコア
 	int m_score;
 
-	bool m_isGameover;
+	//ゲームオーバーフラグ
+	bool m_isGameOver;
 
 	/*--メンバ関数--*/
 public:
@@ -88,7 +86,7 @@ private:
 	//ゲームシステム関連
 	void FitOption();
 	void PanelSlide();
-	void CheckGame();
+	bool IsDead();
 	void GameOver();
 	
 	//選んだ選択肢を取得する
