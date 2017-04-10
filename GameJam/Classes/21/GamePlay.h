@@ -5,8 +5,8 @@
 //--------------------------------------------------------------------------------------
 
 #pragma once
-#include <vector>
 #include "GameScene.h"
+#include "SpriteBatch.h"
 #include "..\8\Panel.h"
 
 #include "../8/MouseManager.h"
@@ -58,15 +58,22 @@ private:
 	int m_mousePosX;
 	int m_mousePosY;
 
-	//デバイス関連
-	Microsoft::WRL::ComPtr<ID3D11Device> m_device;
-	Microsoft::WRL::ComPtr<ID3D11DeviceContext> m_context;
-
 	//スコア
 	int m_score;
 
 	//ゲームオーバーフラグ
 	bool m_isGameOver;
+
+	//デバイス関連
+	Microsoft::WRL::ComPtr<ID3D11Device> m_device;
+	Microsoft::WRL::ComPtr<ID3D11DeviceContext> m_context;
+
+	//画像データ
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_texture;
+
+	//スプライト描画に必須
+	std::unique_ptr<DirectX::SpriteBatch> m_sprite;
+
 
 	/*--メンバ関数--*/
 public:

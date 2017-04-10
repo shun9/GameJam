@@ -76,12 +76,12 @@ GamePlay::~GamePlay()
 //＋ーーーーーーーーーーーーーー＋
 void GamePlay::Update()
 {
-	//ゲーム進行中の処理
-	if (!m_isGameOver)
-	{
 	//マウス更新
 	m_mouse->Update();
 
+	//ゲーム進行中の処理
+	if (!m_isGameOver)
+	{
 	//マウスの座標を更新 間に挟むため半分ずらす
 	m_mousePosX = (m_mouse->GetPosX() + m_scrollPos+ (Panel::SIZE / 2) - MAP_POS_X) / Panel::SIZE ;
 	m_mousePosY = (m_mouse->GetPosY()-MAP_POS_Y) / Panel::SIZE;
@@ -278,7 +278,10 @@ bool GamePlay::IsDead()
 
 void GamePlay::GameOver()
 {
-	m_next = TITLE;
+	if (m_mouse->IsClickedLeft())
+	{
+		m_next = TITLE;
+	}
 }
 
 //＋ーーーーーーーーーーーーーー＋
