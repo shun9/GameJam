@@ -44,7 +44,7 @@ void Game::Initialize(HWND window, int width, int height)
     CreateResources();
 
 	m_Scene = TITLE;
-	m_GameScene = new GameTitle();
+	m_GameScene = new GameTitle(m_d3dDevice, m_d3dContext);
 }
 
 // Executes the basic game loop.
@@ -79,7 +79,7 @@ void Game::Update(DX::StepTimer const& timer)
 		m_GameScene = nullptr;
 		switch (m_Scene)
 		{
-		case TITLE:m_GameScene = new GameTitle();
+		case TITLE:m_GameScene = new GameTitle(m_d3dDevice, m_d3dContext);
 			break;
 		case PLAY:m_GameScene = new GamePlay();
 			break;
@@ -108,7 +108,7 @@ void Game::Render()
 
     // TODO: Add your rendering code here.
 	//ここから下に記述
-
+	m_GameScene->Render();
 
 	//ここから上に記述
 	Present();
