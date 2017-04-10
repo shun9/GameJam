@@ -5,6 +5,9 @@
 #include "pch.h"
 #include "Game.h"
 #include <Mouse.h>
+#include "Classes\8\ADX2Le.h"
+#include "Sounds\GamePlaySounds.h"
+
 
 using namespace DirectX;
 
@@ -87,11 +90,12 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
         g_game->Initialize(hwnd, rc.right - rc.left, rc.bottom - rc.top);
     }
 
+
     // Main message loop
     MSG msg = { 0 };
     while (WM_QUIT != msg.message)
-    {
-        if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+    {		
+		if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
             TranslateMessage(&msg);
             DispatchMessage(&msg);

@@ -5,32 +5,92 @@
 //--------------------------------------------------------------------------------------
 
 #pragma once
-
-#include "..\..\StepTimer.h"
-#include "..\..\Game.h"
+#include <vector>
 #include "GameScene.h"
 #include "..\8\Panel.h"
+#include "../8/MouseManager.h"
+
+struct OPTION
+{
+	Panel* panel;
+	float posX;
+	float posY;
+};
 
 class GamePlay : public GameScene
 {
-private:
-	Panel* m_panel[3][7];
-
-	std::unique_ptr<DirectX::Mouse> m_mouse;
-	Microsoft::WRL::ComPtr<ID3D11Device>  m_d3dDevice;
-	Microsoft::WRL::ComPtr<ID3D11DeviceContext>     m_d3dContext;
-	DX::StepTimer                                   m_timer;
-
+	/*--静的変数--*/
 public:
-	GamePlay();
+	static const int MAP_Y;
+	static const int MAP_X;
+	static const int MAP_POS_X;
+	static const int MAP_POS_Y;
+
+private:
+	static const int MAX_OPTION;
+	static const float OPTION_POS_X[3];
+	static const float OPTION_POS_Y;
+
+
+	/*--メンバ変数--*/
+private:
+	//ステージのパネル
+	Panel*** m_panel;
+	
+	//選択肢のパネル
+	OPTION* m_option;
+
+	//選択中の番号
+	int m_numChoosed;
+
+	//カウント
+	int m_cntTime;
+	float m_scrollPos;
+
+	//マウス
+	MouseManager* m_mouse;
+	int m_mousePosX;
+	int m_mousePosY;
+
+	//デバイス関連
+	Microsoft::WRL::ComPtr<ID3D11Device> m_device;
+	Microsoft::WRL::ComPtr<ID3D11DeviceContext> m_context;
+
+	//スコア
+	int m_score;
+
+	/*--メンバ関数--*/
+public:
+	GamePlay(Microsoft::WRL::ComPtr<ID3D11Device> device
+	, Microsoft::WRL::ComPtr<ID3D11DeviceContext> context);
 	~GamePlay();
 
 	void Update();
 	void Render();
 
-	void StageMove();
-	void PaneFit();
+private:
+	//更新処理関連
+	void UpdateStage();
+	void UpdateOption();
+
+	//ゲームシステム関連
+	void FitOption();
 	void PanelSlide();
 	void CheckGame();
 	void GameOver();
+	
+	//選んだ選択肢を取得する
+	int ChoosedOption();
+
+	//描画関連
+	void DrawStage();
+	void DrawOption();
+
+	//作成関連
+	void CreateStage();
+	void CreateOption();
+
+	//削除関連
+	void DeleteStage();
+	void DeleteOption();
 };

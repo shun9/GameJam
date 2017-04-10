@@ -39,11 +39,7 @@ GameTitle::~GameTitle()
 
 void GameTitle::Update()
 {
-	m_mouse->Update();
-	if (m_mouse->IsClickedLeft())
-	{
-		m_next = PLAY;
-	}
+
 }
 
 void GameTitle::Render()
