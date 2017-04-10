@@ -18,11 +18,12 @@ GamePlay::GamePlay()
 			if (!(i == 0 && j == 1))
 			{
 				m_panel[j][i] = new Panel(m_d3dDevice, m_d3dContext,
-					&PanelName[0], Panel::passRightLeft);
+					Panel::passRightLeft);
 			}
 			else
 			{
-				SetPanel(i, j);
+				m_panel[j][i] = new Panel(m_d3dDevice, m_d3dContext,
+					Panel::GetRandomPass());
 			}
 			m_panel[j][i]->Draw();
 		}
@@ -50,28 +51,6 @@ void GamePlay::Update()
 void GamePlay::Render()
 {
 
-}
-
-void GamePlay::SetPanel(int x, int y)
-{
-	int type;
-	type = rand() % 7;
-	m_panel[y][x] = nullptr;
-	m_panel[y][x] = new Panel(m_d3dDevice, m_d3dContext, &PanelName[type], SetType(type));
-}
-
-PanelPass GamePlay::SetType(int type)
-{
-	switch (type)
-	{
-	case 0:return Panel::passRightLeft; break;
-	case 1:return Panel::passTopBottom; break;
-	case 2:return Panel::passTopRight; break;
-	case 3:return Panel::passTopLeft; break;
-	case 4:return Panel::passBottomRight; break;
-	case 5:return Panel::passBottomLeft; break;
-	default: return Panel::passNone;
-	}
 }
 
 void GamePlay::StageMove()
