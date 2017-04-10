@@ -87,6 +87,7 @@ private:
 	//ゲームシステム関連
 	void FitOption();
 	void PanelSlide();
+	bool IsDead();
 	void CheckGame();
 	void GameOver();
 	
