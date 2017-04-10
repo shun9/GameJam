@@ -8,6 +8,7 @@
 #include <vector>
 #include "GameScene.h"
 #include "..\8\Panel.h"
+<<<<<<< HEAD
 #include "../8/MouseManager.h"
 
 struct OPTION
@@ -16,6 +17,8 @@ struct OPTION
 	float posX;
 	float posY;
 };
+=======
+>>>>>>> 904c7b17d5e2b6a14be1d5a084a2559150156735
 
 class GamePlay : public GameScene
 {

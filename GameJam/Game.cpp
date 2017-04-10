@@ -48,6 +48,7 @@ void Game::Initialize(HWND window, int width, int height)
 
     CreateResources();
 
+<<<<<<< HEAD
 	//ƒTƒEƒ“ƒh‚Ì‰Šú‰»
 	ADX2Le::Initialize("Sounds\\GameJam.acf");
 	ADX2Le::LoadAcb("Sounds\\GamePlaySounds.acb", "Sounds\\GamePlaySounds.awb");
@@ -58,6 +59,10 @@ void Game::Initialize(HWND window, int width, int height)
 
 
 	m_play = new GamePlay(m_d3dDevice,m_d3dContext);
+=======
+	m_Scene = TITLE;
+	m_GameScene = new GameTitle();
+>>>>>>> 904c7b17d5e2b6a14be1d5a084a2559150156735
 }
 
 // Executes the basic game loop.

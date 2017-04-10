@@ -10,6 +10,8 @@
 GameTitle::GameTitle()
 {
 	m_next = TITLE;
+	m_mouse = MouseManager::GetInstance();
+
 }
 
 GameTitle::~GameTitle()
@@ -18,7 +20,15 @@ GameTitle::~GameTitle()
 
 void GameTitle::Update()
 {
+<<<<<<< HEAD
 
+=======
+	m_mouse->Update();
+	if (m_mouse->IsClickedLeft())
+	{
+		m_next = PLAY;
+	}
+>>>>>>> 904c7b17d5e2b6a14be1d5a084a2559150156735
 }
 
 void GameTitle::Render()

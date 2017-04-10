@@ -31,9 +31,12 @@
     <ClInclude Include="Classes\21\GameTitle.h">
       <Filter>Classes\21</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Classes\8\ADX2Le.h">
       <Filter>Classes\8</Filter>
     </ClInclude>
+=======
+>>>>>>> 904c7b17d5e2b6a14be1d5a084a2559150156735
     <ClInclude Include="Classes\8\MouseManager.h">
       <Filter>Classes\8</Filter>
     </ClInclude>
@@ -51,9 +54,12 @@
     <ClCompile Include="Classes\21\GameTitle.cpp">
       <Filter>Classes\21</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="Classes\8\ADX2Le.cpp">
       <Filter>Classes\8</Filter>
     </ClCompile>
+=======
+>>>>>>> 904c7b17d5e2b6a14be1d5a084a2559150156735
     <ClCompile Include="Classes\8\MouseManager.cpp">
       <Filter>Classes\8</Filter>
     </ClCompile>

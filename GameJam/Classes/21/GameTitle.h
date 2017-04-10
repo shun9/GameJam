@@ -9,15 +9,17 @@
 #include "..\..\StepTimer.h"
 #include"..\..\Game.h"
 #include "GameScene.h"
+#include "..\8\MouseManager.h"
 
 class GameTitle : public GameScene
 {
 private:
-	std::unique_ptr<DirectX::Mouse> m_mouse;
+	MouseManager* m_mouse;
 
 public:
 	GameTitle();
 	~GameTitle();
+
 
 	void Update();
 	void Render();
