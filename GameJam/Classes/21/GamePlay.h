@@ -9,6 +9,7 @@
 #include "GameScene.h"
 #include "..\8\Panel.h"
 #include "../8/MouseManager.h"
+#include "../20/Player.h"
 
 struct OPTION
 {
@@ -34,6 +35,9 @@ private:
 
 	/*--メンバ変数--*/
 private:
+	//プレイヤー
+	Player* m_player;
+
 	//ステージのパネル
 	Panel*** m_panel;
 	
@@ -72,6 +76,7 @@ private:
 	//更新処理関連
 	void UpdateStage();
 	void UpdateOption();
+	void UpdatePlayer();
 
 	//ゲームシステム関連
 	void FitOption();
@@ -81,6 +86,9 @@ private:
 	
 	//選んだ選択肢を取得する
 	int ChoosedOption();
+
+	//パネルを繋げる
+	void LinkPanel();
 
 	//描画関連
 	void DrawStage();
