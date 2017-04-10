@@ -24,6 +24,7 @@ private:
 	RECT m_fullscreenRect;
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_background;
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_button;
+	std::unique_ptr<DirectX::CommonStates> m_commonStates;
 
 	//スプライト描画
 	std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;
@@ -32,6 +33,10 @@ private:
 	DirectX::SimpleMath::Vector2 m_screenPos;
 	DirectX::SimpleMath::Vector2 m_backorigin;
 	DirectX::SimpleMath::Vector2 m_buttonorigin;
+
+
+	bool m_clickNow;
+	bool m_clickBefore;
 
 public:
 	GameTitle(Microsoft::WRL::ComPtr<ID3D11Device> device

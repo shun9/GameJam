@@ -4,14 +4,14 @@
  *  Tool Ver.        : CRI Atom Craft LE Ver.2.13.00
  *  File Path        : C:/Users/s162044/Documents/CriAtomCraft/GameJam/Public/GamePlay/GamePlaySounds.acb
  *  File Name        : GamePlaySounds.acb
- *  File Size        : 226,240 bytes
- *  Date Time        : 2017/04/10 16:11
+ *  File Size        : 385,088 bytes
+ *  Date Time        : 2017/04/11 5:38
  *  Target           : Public
- *  Cues             : 5
+ *  Cues             : 8
  *  CueSheet Comment : 
  *===========================================================================*/
 
-#define CRI_GAMEPLAYSOUNDS_CUENUM (5)
+#define CRI_GAMEPLAYSOUNDS_CUENUM (8)
 
 /* AISAC Control List (AISAC Control ID) */
 // No AISAC Control
@@ -23,6 +23,9 @@
 #define CRI_GAMEPLAYSOUNDS_FALL           ( 3) /*   */
 #define CRI_GAMEPLAYSOUNDS__CUE_ID_4      ( 4) /*  // クリック音 */
 #define CRI_GAMEPLAYSOUNDS__CUE_ID_5      ( 5) /*  // ファミコンブギウギ_0 */
+#define CRI_GAMEPLAYSOUNDS__CUE_ID_6      ( 6) /*  // 恐怖 */
+#define CRI_GAMEPLAYSOUNDS__CUE_ID_7      ( 7) /*  // 男性の悲鳴 */
+#define CRI_GAMEPLAYSOUNDS_CONVEYOR       ( 8) /*   */
 
 /* Block List (Block Index) */
 

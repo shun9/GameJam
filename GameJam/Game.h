@@ -13,7 +13,6 @@
 class Game
 {
 private:
-	GamePlay* m_play;
 	GameScene* m_GameScene;
 
 public:

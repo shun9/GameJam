@@ -15,10 +15,10 @@ using namespace DirectX;
 const int Panel::SIZE         = 128;
 const int Panel::MAX_PASS_NUM = 7;
 
-//パス一覧
+//パス一覧                                 上　　下　　左　 右
 const PanelPass Panel::passTopRight    = { true, false,false,true,  L"Resources\\Road3.png" };
 const PanelPass Panel::passTopLeft     = { true, false,true, false, L"Resources\\Road4.png" };
-const PanelPass Panel::passBottomRight = { false,true, false,true, L"Resources\\Road5.png" };
+const PanelPass Panel::passBottomRight = { false,true, false,true,  L"Resources\\Road5.png" };
 const PanelPass Panel::passBottomLeft  = { false,true, true, false, L"Resources\\Road6.png" };
 const PanelPass Panel::passRightLeft   = { false,false,true, true,  L"Resources\\Road1.png" };
 const PanelPass Panel::passTopBottom   = { true, true, false,false, L"Resources\\Road2.png" };
@@ -37,38 +37,19 @@ PanelPass Panel::GetRandomPass()
 	std::mt19937 mt(random());
 
 	//乱数の値を制限
-	std::uniform_int_distribution<int> num(0, MAX_PASS_NUM - 1);
+	std::uniform_int_distribution<int> num(0, 100);
 	
 	PanelPass pass;
 
-	//ランダムでパスを決定
-	switch (num(mt))
-	{
-	case 0:
-		pass = passTopRight;
-		break;
-	case 1:
-		pass = passTopLeft;
-		break;
-	case 2:
-		pass = passBottomRight;
-		break;
-	case 3:
-		pass = passBottomLeft;
-		break;
-	case 4:
-		pass = passRightLeft;
-		break;
-	case 5:
-		pass = passTopBottom;
-		break;
-	case 6:
-		pass = passNone;
-		break;
-	default:
-		pass = passTopRight;
-		break;
-	}
+	int result = num(mt);
+
+	if		(result < 10) { pass = passRightLeft;	}
+	else if (result < 26) { pass = passTopRight;	}
+	else if (result < 42) { pass = passTopLeft;		}
+	else if (result < 58) { pass = passBottomRight;	}
+	else if (result < 74) { pass = passBottomLeft;	}
+	else if (result < 90) { pass = passTopBottom;	}
+	else				  { pass = passNone;		}
 
 	return pass;
 }
@@ -164,7 +145,7 @@ bool Panel::CanPass(int direction)
 	}
 
 	//隣接するパネルに道が無ければ進めない
-	if (CanPassLinkPanel(direction)==false)
+	if (CanPassLinkPanel(direction) == false)
 	{
 		return false;
 	}
@@ -189,13 +170,17 @@ bool Panel::CanPassLinkPanel(int direction)
 	{
 	case TOP:
 		canPass = m_linkPanel[direction]->m_canPass[BOTTOM];
+		break;
 	case BOTTOM:
 		canPass = m_linkPanel[direction]->m_canPass[TOP];
+		break;
 
 	case LEFT:
-		canPass = m_linkPanel[direction]->m_canPass[LEFT];
-	case RIGHT:
 		canPass = m_linkPanel[direction]->m_canPass[RIGHT];
+		break;
+	case RIGHT:
+		canPass = m_linkPanel[direction]->m_canPass[LEFT];
+		break;
 
 	default:
 		break;
