@@ -5,8 +5,8 @@
 //--------------------------------------------------------------------------------------
 
 #pragma once
-#include <vector>
 #include "GameScene.h"
+#include "SpriteBatch.h"
 #include "..\8\Panel.h"
 #include "../8/MouseManager.h"
 #include "../20/Player.h"
@@ -69,6 +69,7 @@ private:
 	int m_score;
 
 	bool m_isGameover;
+
 	/*--ÉÅÉìÉoä÷êî--*/
 public:
 	GamePlay(Microsoft::WRL::ComPtr<ID3D11Device> device
