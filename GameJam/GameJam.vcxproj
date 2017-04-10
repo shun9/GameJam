@@ -68,6 +68,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\cri\pc\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\cri\pc\libs\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -161,6 +163,10 @@
     <ClInclude Include="Classes\21\GamePlay.h" />
     <ClInclude Include="Classes\21\GameScene.h" />
     <ClInclude Include="Classes\21\GameTitle.h" />
+<<<<<<< HEAD
+    <ClInclude Include="Classes\8\ADX2Le.h" />
+=======
+>>>>>>> 904c7b17d5e2b6a14be1d5a084a2559150156735
     <ClInclude Include="Classes\8\MouseManager.h" />
     <ClInclude Include="Classes\8\Panel.h" />
     <ClInclude Include="Game.h" />
@@ -170,6 +176,10 @@
   <ItemGroup>
     <ClCompile Include="Classes\21\GamePlay.cpp" />
     <ClCompile Include="Classes\21\GameTitle.cpp" />
+<<<<<<< HEAD
+    <ClCompile Include="Classes\8\ADX2Le.cpp" />
+=======
+>>>>>>> 904c7b17d5e2b6a14be1d5a084a2559150156735
     <ClCompile Include="Classes\8\MouseManager.cpp" />
     <ClCompile Include="Classes\8\Panel.cpp" />
     <ClCompile Include="Game.cpp" />

@@ -12,7 +12,7 @@
 using namespace DirectX;
 
 //‚P•Ó‚Ì‘å‚«‚³
-const int Panel::SIZE         = 64;
+const int Panel::SIZE         = 128;
 const int Panel::MAX_PASS_NUM = 7;
 
 //ƒpƒXˆê——

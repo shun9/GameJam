@@ -9,12 +9,20 @@
 #include"..\..\StepTimer.h"
 #include"..\..\Game.h"
 
+enum
+{
+	TITLE,
+	PLAY,
+};
+
+
 class GameScene
 {
 public:
 	virtual ~GameScene() {};
 
 	int m_next;
+
 	//ƒˆ‰¼‘zŠÖ”
 	virtual void Update() = 0;
 	virtual void Render() = 0;
