@@ -1,8 +1,9 @@
-//--------------------------------------------------------------------------------------
-// File: GamePlay.cpp
-// Date: 2017.04.07
-// Author: Syuto Yamada
-//--------------------------------------------------------------------------------------
+//************************************************/
+//* @file  :GamePlay.cpp
+//* @brief :プレイシーン
+//* @date  :2017/04/10
+//* @author:S.Katou
+//************************************************/
 
 #include "..\..\pch.h"
 #include "..\..\Game.h"
@@ -13,15 +14,19 @@
 
 using namespace DirectX;
 using namespace std;
+<<<<<<< HEAD
 using namespace SimpleMath;
+=======
+using namespace DirectX;
+>>>>>>> last
 
 const int GamePlay::MAP_Y             = 3;
 const int GamePlay::MAP_X             = 8;
 const int GamePlay::MAP_POS_X         = 0;
 const int GamePlay::MAP_POS_Y         = 20;
 const int GamePlay::MAX_OPTION        = 3;
-const float GamePlay::OPTION_POS_X[3] = {200.0f,350.0f,500.0f};
-const float GamePlay::OPTION_POS_Y    = 450.0f;
+const float GamePlay::OPTION_POS_X[3] = {158.0f,343.0f,521.0f};
+const float GamePlay::OPTION_POS_Y    = 455.0f;
 
 //＋ーーーーーーーーーーーーーー＋
 //｜機能  :コンストラクタ
@@ -34,6 +39,7 @@ GamePlay::GamePlay(Microsoft::WRL::ComPtr<ID3D11Device> device
 	, m_context(context)
 	, m_cntTime(0)
 	, m_scrollPos(0)
+	, m_scrollSpd(0.2f)
 	, m_numChoosed(-1)
 	, m_score(0)
 	, m_isGameOver(false)
@@ -46,8 +52,31 @@ GamePlay::GamePlay(Microsoft::WRL::ComPtr<ID3D11Device> device
 	//次のシーン
 	m_next = PLAY;
 
+	ADX2Le::LoadAcb("Sounds\\GamePlaySounds.acb", "Sounds\\GamePlaySounds.awb");
+	ADX2Le::Play(CRI_GAMEPLAYSOUNDS_CONVEYOR);
+
 	//マウスの取得
 	m_mouse = MouseManager::GetInstance();
+
+
+	m_sprite = unique_ptr<SpriteBatch>(new SpriteBatch(m_context.Get()));
+	m_commonStates = unique_ptr<CommonStates>(new CommonStates(m_device.Get()));
+	CreateWICTextureFromFile(m_device.Get(), L"Resources\\Road7.png", nullptr, m_back.ReleaseAndGetAddressOf());
+	CreateWICTextureFromFile(m_device.Get(), L"Resources\\Result.png", nullptr, m_result.ReleaseAndGetAddressOf());
+	CreateWICTextureFromFile(m_device.Get(), L"Resources\\BacktoTitle.png", nullptr, m_backToTitle.ReleaseAndGetAddressOf());
+	CreateWICTextureFromFile(m_device.Get(), L"Resources\\stage.png", nullptr, m_stage.ReleaseAndGetAddressOf());
+	CreateWICTextureFromFile(m_device.Get(), L"Resources\\flame.png", nullptr, m_flame.ReleaseAndGetAddressOf());
+
+	CreateWICTextureFromFile(m_device.Get(), L"Resources\\number0.png", nullptr, m_number[0].ReleaseAndGetAddressOf());
+	CreateWICTextureFromFile(m_device.Get(), L"Resources\\number1.png", nullptr, m_number[1].ReleaseAndGetAddressOf());
+	CreateWICTextureFromFile(m_device.Get(), L"Resources\\number2.png", nullptr, m_number[2].ReleaseAndGetAddressOf());
+	CreateWICTextureFromFile(m_device.Get(), L"Resources\\number3.png", nullptr, m_number[3].ReleaseAndGetAddressOf());
+	CreateWICTextureFromFile(m_device.Get(), L"Resources\\number4.png", nullptr, m_number[4].ReleaseAndGetAddressOf());
+	CreateWICTextureFromFile(m_device.Get(), L"Resources\\number5.png", nullptr, m_number[5].ReleaseAndGetAddressOf());
+	CreateWICTextureFromFile(m_device.Get(), L"Resources\\number6.png", nullptr, m_number[6].ReleaseAndGetAddressOf());
+	CreateWICTextureFromFile(m_device.Get(), L"Resources\\number7.png", nullptr, m_number[7].ReleaseAndGetAddressOf());
+	CreateWICTextureFromFile(m_device.Get(), L"Resources\\number8.png", nullptr, m_number[8].ReleaseAndGetAddressOf());
+	CreateWICTextureFromFile(m_device.Get(), L"Resources\\number9.png", nullptr, m_number[9].ReleaseAndGetAddressOf());
 
 	//ステージの作成
 	CreateStage();
@@ -55,12 +84,17 @@ GamePlay::GamePlay(Microsoft::WRL::ComPtr<ID3D11Device> device
 	//選択肢の作成
 	CreateOption();
 
+<<<<<<< HEAD
 	//座標設定
 	m_resultPos.x = float(0);
 	m_resultPos.y = float(0);
 
 	m_player = new Player(MAP_POS_X+Panel::SIZE,
 						  MAP_POS_Y+Panel::SIZE,
+=======
+	m_player = new Player(MAP_POS_X+Panel::SIZE+20,
+						  MAP_POS_Y+Panel::SIZE+MAP_POS_Y,
+>>>>>>> last
 						  m_device,m_context);
 }
 
@@ -112,6 +146,7 @@ void GamePlay::Update()
 	//ゲームオーバー中の処理
 	if (m_isGameOver)
 	{
+		m_cntTime++;
 		GameOver();
 	}
 }
@@ -123,8 +158,27 @@ void GamePlay::Update()
 //＋ーーーーーーーーーーーーーー＋
 void GamePlay::Render()
 {
+	//描画開始
+	m_sprite->Begin(DirectX::SpriteSortMode_Deferred, m_commonStates->NonPremultiplied(), m_commonStates->PointClamp());
+	
+	//背景描画
+	m_sprite->Draw(m_back.Get(), DirectX::XMFLOAT2(0.0f, 0.0f), nullptr, DirectX::Colors::White, 0.0f, DirectX::XMFLOAT2(0.0f, 0.0f), DirectX::XMFLOAT2(10.0f, 3.44f));
+	
+	//フレーム描画
+	m_sprite->Draw(m_flame.Get(), DirectX::XMFLOAT2(0.0f, 440.0f), nullptr, DirectX::Colors::White, 0.0f, DirectX::XMFLOAT2(0.0f, 0.0f), DirectX::XMFLOAT2(1.0f, 1.0f));
+
+	m_sprite->End();
+
+
 	//ステージの描画
 	DrawStage();
+
+	//描画開始
+	m_sprite->Begin(DirectX::SpriteSortMode_Deferred, m_commonStates->NonPremultiplied(), m_commonStates->PointClamp());
+	//とげ描画
+	m_sprite->Draw(m_stage.Get(), DirectX::XMFLOAT2(-12.0f, -1.0f), nullptr, DirectX::Colors::Crimson, 0.0f, DirectX::XMFLOAT2(0.0f, 0.0f), DirectX::XMFLOAT2(1.05f, 1.1f));
+	m_sprite->End();
+
 
 	//選択肢の描画
 	DrawOption();
@@ -132,6 +186,7 @@ void GamePlay::Render()
 	//プレイヤー描画
 	m_player->Render();
 
+<<<<<<< HEAD
 	if (m_isGameOver)
 	{
 		m_spriteBatch->Begin();
@@ -139,6 +194,27 @@ void GamePlay::Render()
 		m_spriteBatch->Draw(m_result2.Get(), Vector2(190.0f, 450.0f), nullptr, Colors::White, 0.f, m_resultPos2);
 		m_spriteBatch->End();
 	}
+=======
+
+
+	//描画開始
+	m_sprite->Begin(DirectX::SpriteSortMode_Deferred, m_commonStates->NonPremultiplied(), m_commonStates->PointClamp());
+
+	if (m_isGameOver)
+	{
+		//リザルト画面
+		m_sprite->Draw(m_result.Get(), DirectX::XMFLOAT2(100.0f, 70.0f), nullptr, DirectX::Colors::Crimson, 0.0f, DirectX::XMFLOAT2(0.0f, 0.0f), DirectX::XMFLOAT2(1.0f, 1.0f));
+		m_sprite->Draw(m_backToTitle.Get(), DirectX::XMFLOAT2(180.0f, 450.0f), nullptr, DirectX::Colors::Crimson, 0.0f, DirectX::XMFLOAT2(0.0f, 0.0f), DirectX::XMFLOAT2(1.0f, 1.0f));
+		
+		//スコア
+		m_sprite->Draw(m_number[m_scoreDigit[0]].Get(), DirectX::XMFLOAT2(200.0f, 200.0f), nullptr, DirectX::Colors::Crimson, 0.0f, DirectX::XMFLOAT2(0.0f, 0.0f), DirectX::XMFLOAT2(3.0f, 3.0f));
+		m_sprite->Draw(m_number[m_scoreDigit[1]].Get(), DirectX::XMFLOAT2(350.0f, 200.0f), nullptr, DirectX::Colors::Crimson, 0.0f, DirectX::XMFLOAT2(0.0f, 0.0f), DirectX::XMFLOAT2(3.0f, 3.0f));
+		m_sprite->Draw(m_number[m_scoreDigit[2]].Get(), DirectX::XMFLOAT2(500.0f, 200.0f), nullptr, DirectX::Colors::Crimson, 0.0f, DirectX::XMFLOAT2(0.0f, 0.0f), DirectX::XMFLOAT2(3.0f, 3.0f));
+	}
+
+	m_sprite->End();
+
+>>>>>>> last
 }
 
 //＋ーーーーーーーーーーーーーー＋
@@ -149,7 +225,7 @@ void GamePlay::Render()
 void GamePlay::UpdateStage()
 {
 	//スクロールする
-	m_scrollPos += 0.1f;
+	m_scrollPos += m_scrollSpd;
 
 	//１パネル分スクロールしたら
 	if (m_scrollPos >= Panel::SIZE)
@@ -162,6 +238,9 @@ void GamePlay::UpdateStage()
 
 		//位置を戻す
 		m_scrollPos = 0.0f;
+
+		//スピードアップ
+		m_scrollSpd += 0.01f;
 	}
 }
 
@@ -202,12 +281,12 @@ void GamePlay::UpdateOption()
 void GamePlay::UpdatePlayer()
 {
 	DirectX::SimpleMath::Vector2 pos = m_player->getPos();
-	int x = (pos.x + m_scrollPos - MAP_POS_X) / Panel::SIZE;
+	int x = (pos.x +m_scrollPos - MAP_POS_X) / Panel::SIZE;
 	int y = (pos.y - MAP_POS_Y) / Panel::SIZE;
 
 	m_player->registerPanel(m_panel[y][x]);
 
-	m_player->Update();
+	m_player->Update(m_scrollSpd);
 }
 
 
@@ -282,20 +361,29 @@ bool GamePlay::IsDead()
 {
 	DirectX::SimpleMath::Vector2 pos = m_player->getPos();
 
-	//画面左端、上端、下端に出たらゲームオーバー
-	if (pos.x < -Panel::SIZE / 2
-	||  pos.y < -Panel::SIZE / 2 + MAP_POS_Y
-	||  pos.y >  Panel::SIZE * MAP_Y + Panel::SIZE / 2)
+	//ステージ外に出たらゲームオーバー
+	if (pos.x < 0.0f
+	||  pos.x > 740.0f          
+	||  pos.y < 0.0f
+	||  pos.y >  Panel::SIZE * MAP_Y-30.0f)
 	{
-		ADX2Le::Play(CRI_GAMEPLAYSOUNDS_FALL);
+		ADX2Le::LoadAcb("Sounds\\GamePlaySounds.acb", "Sounds\\GamePlaySounds.awb");
+		ADX2Le::Play(CRI_GAMEPLAYSOUNDS__CUE_ID_7);
+		DivideScore();
 		return true;
 	}
 
 	return false;
 }
 
+//＋ーーーーーーーーーーーーーー＋
+//｜機能  :ゲームオーバー判定
+//｜引数  :なし(void)
+//｜戻り値:なし(void)
+//＋ーーーーーーーーーーーーーー＋
 void GamePlay::GameOver()
 {
+<<<<<<< HEAD
 	if (m_mouse->IsClickedLeft())
 	{
 		if (m_next != PLAY)
@@ -304,6 +392,62 @@ void GamePlay::GameOver()
 		}
 		m_next = TITLE;
 	}
+=======
+	if (m_cntTime >= 60)
+	{
+		if (m_mouse->IsClickedLeft())
+		{
+			m_next = TITLE;
+		}
+	}
+}
+
+//＋ーーーーーーーーーーーーーー＋
+//｜機能  :スコアを桁ごとに分解する
+//｜引数  :なし(void)
+//｜戻り値:なし(void)
+//＋ーーーーーーーーーーーーーー＋
+void GamePlay::DivideScore()
+{
+	//1000でカンスト
+	if (m_score >= 1000)
+	{
+		m_score = 999;
+		m_scoreDigit[0] = 9;
+		m_scoreDigit[1] = 9;
+		m_scoreDigit[2] = 9;
+		return;
+	}
+	
+	//100の位
+	int digit100 = 0;
+	while (m_score >= 100)
+	{
+		digit100++;
+		m_score -= 100;
+	}
+	m_scoreDigit[0] = digit100;
+
+	//10の位
+	int digit10 = 0;
+	while (m_score >= 10)
+	{
+		digit10++;
+		m_score -= 10;
+	}
+	m_scoreDigit[1] = digit10;
+
+	//1の位
+	int digit1 = 0;
+	while (m_score >= 1)
+	{
+		digit1++;
+		m_score -= 1;
+	}
+
+	m_scoreDigit[2] = digit1;
+
+>>>>>>> last
 }
 
 //＋ーーーーーーーーーーーーーー＋
@@ -415,6 +559,7 @@ void GamePlay::DrawOption()
 		}
 	}
 }
+
 
 
 //＋ーーーーーーーーーーーーーー＋

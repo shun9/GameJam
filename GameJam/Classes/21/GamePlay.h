@@ -1,8 +1,9 @@
-//--------------------------------------------------------------------------------------
-// File: GamePlay.h
-// Date: 2017.04.07
-// Author: Syuto Yamada
-//--------------------------------------------------------------------------------------
+//************************************************/
+//* @file  :GamePlay.h
+//* @brief :プレイシーン
+//* @date  :2017/04/10
+//* @author:S.Katou
+//************************************************/
 
 #pragma once
 #include <vector>
@@ -52,6 +53,7 @@ private:
 	//カウント
 	int m_cntTime;
 	float m_scrollPos;
+	float m_scrollSpd;
 
 	//マウス
 	MouseManager* m_mouse;
@@ -61,6 +63,14 @@ private:
 	//デバイス関連
 	Microsoft::WRL::ComPtr<ID3D11Device> m_device;
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> m_context;
+	std::unique_ptr<DirectX::CommonStates> m_commonStates;
+	std::unique_ptr<DirectX::SpriteBatch> m_sprite;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_number[10];
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_back;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_flame;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_result;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_stage;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_backToTitle;
 
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_result;
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_result2;
@@ -73,6 +83,7 @@ private:
 
 	//スコア
 	int m_score;
+	int m_scoreDigit[3];
 
 	//ゲームオーバーフラグ
 	bool m_isGameOver;
@@ -97,7 +108,8 @@ private:
 	void PanelSlide();
 	bool IsDead();
 	void GameOver();
-	
+	void DivideScore();
+
 	//選んだ選択肢を取得する
 	int ChoosedOption();
 

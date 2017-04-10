@@ -2,7 +2,12 @@
 //製作者　山岸正都
 //プレイヤークラスのソースファイル
 
+//2017/04/10
+//
+
 #include "Player.h"
+#include "..\8\ADX2Le.h"
+#include "..\..\Sounds\GamePlaySounds.h"
 
 using namespace std;
 using namespace Microsoft::WRL;
@@ -21,6 +26,7 @@ Player::Player(float x, float y	,Microsoft::WRL::ComPtr<ID3D11Device> device,
 	,m_deviceContext(context)
 {
 	m_sprite = std::unique_ptr<DirectX::SpriteBatch>(new SpriteBatch(m_deviceContext.Get()));
+	m_commonStates = std::unique_ptr<DirectX::CommonStates>(new CommonStates(m_device.Get()));
 
 	m_pos.x = x;
 	m_pos.y = y;
@@ -56,10 +62,10 @@ Player::~Player()
 //!
 //! @return なし
 //----------------------------------------------------------------------
-void Player::Update()
+void Player::Update(float scroll)
 {
 	work();
-	m_pos.x -= 0.1f;
+	m_pos.x -= scroll;
 }
 
 //----------------------------------------------------------------------
@@ -71,9 +77,13 @@ void Player::Update()
 //----------------------------------------------------------------------
 void Player::Render()
 {
-	m_sprite->Begin();
+	changeTexture();
 
-	m_sprite->Draw(m_texture[m_texture_num].Get(), XMFLOAT2(m_pos.x, m_pos.y), nullptr, Colors::White);
+	//m_sprite->Begin();
+	m_sprite->Begin(SpriteSortMode_Deferred, m_commonStates->NonPremultiplied(), m_commonStates->PointClamp());
+
+	//m_sprite->Draw(m_texture[m_texture_num].Get(), XMFLOAT2(m_pos.x, m_pos.y), nullptr, Colors::White);
+	m_sprite->Draw(m_texture[m_texture_num].Get(), XMFLOAT2(m_pos.x, m_pos.y), nullptr, Colors::White, 0.0f, Vector2(0.0f, 0.0f), Vector2(1.0f, 1.0f));
 
 	m_sprite->End();
 }
@@ -85,16 +95,16 @@ void Player::Render()
 //!
 //! @return プレイヤーがどの方向に動けるか
 //----------------------------------------------------------------------
-int Player::isWork(int direction)
+bool Player::isWork(int direction)
 {
 	//進めるならその方向を返す
 	if (m_panel->CanPass(direction) == true)
 	{
-		return direction;
+		return true;
 	}
 	else
 	{
-		return 4;
+		return false;
 	}
 }
 
@@ -107,24 +117,43 @@ int Player::isWork(int direction)
 //----------------------------------------------------------------------
 void Player::work()
 {
+	if (m_work_num == 1)
+	{
+		ADX2Le::Play(CRI_GAMEPLAYSOUNDS_DASH_ASPHALT2);
+	}
+
 	//プレイヤーが動いていない場合
 	if (m_state == false)
 	{
+<<<<<<< HEAD
 		//動けるかどうかを確認
 		for (int direction = 3; direction > -1; direction--)
+=======
+		m_state = false;
+		int dir = m_direction;
+		if (isWork(TOP))
+>>>>>>> last
 		{
-			if (isWork(direction) < 4)
+			if (isDirection(TOP, dir) == true)
 			{
-				if (isDirection(direction, m_direction) == true)
-				{
-					m_state = true;
-					m_direction = direction;
-					break;
-				}
+				m_state = true;
+				m_direction = TOP;
 			}
-			else
+		}
+		if (isWork(BOTTOM))
+		{
+			if (isDirection(BOTTOM, dir) == true)
 			{
-				m_state = false;
+				m_state = true;
+				m_direction = BOTTOM;
+			}
+		}
+		if (isWork(RIGHT))
+		{
+			if (isDirection(RIGHT, dir) == true)
+			{
+				m_state = true;
+				m_direction = RIGHT;
 			}
 		}
 	}
@@ -159,8 +188,9 @@ void Player::work()
 		}
 	}
 
+
 	//１パネル分進んだら
-	if (m_work_num == 64)
+	if (m_work_num >= Panel::SIZE/2)
 	{
 		//プレイヤーを歩かせない状態にして、カウントを０にする
 		m_state = false;
@@ -195,20 +225,17 @@ void Player::changeTexture()
 	{
 		m_texture_num = 0;
 	}
+	
 	//動ける場合
-	else if (m_state == true)
+	if (m_state == true)
 	{
-		//動いている歩数で画像を差し替える
-		for (int i = 0; i < 64; i++)
+		if (m_work_num % 20>=10)
 		{
-			if (m_work_num == 1 || m_work_num == 16 || m_work_num == 32 || m_work_num == 48)
-			{
-				m_texture_num = 1;
-			}
-			else if (m_work_num == 8 || m_work_num == 24 || m_work_num == 40 || m_work_num == 56)
-			{
-				m_texture_num = 2;
-			}
+			m_texture_num = 1;
+		}
+		else
+		{
+			m_texture_num = 2;
 		}
 	}
 }

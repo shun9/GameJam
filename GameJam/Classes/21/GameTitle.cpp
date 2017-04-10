@@ -17,7 +17,7 @@ GameTitle::GameTitle(Microsoft::WRL::ComPtr<ID3D11Device> device
 {
 	//BGM再生
 	ADX2Le::LoadAcb("Sounds\\GamePlaySounds.acb", "Sounds\\GamePlaySounds.awb");
-	ADX2Le::Play(CRI_GAMEPLAYSOUNDS__CUE_ID_5);
+	ADX2Le::Play(CRI_GAMEPLAYSOUNDS__CUE_ID_6);
 
 	m_next = TITLE;
 
@@ -25,6 +25,7 @@ GameTitle::GameTitle(Microsoft::WRL::ComPtr<ID3D11Device> device
 	m_mouse = MouseManager::GetInstance();
 
 	m_spriteBatch = std::make_unique<SpriteBatch>(deviceContext.Get());
+	m_commonStates = std:: unique_ptr<CommonStates>(new CommonStates(device.Get()));
 	CreateWICTextureFromFile(device.Get(), L"Resources\\title.png", nullptr, m_background.ReleaseAndGetAddressOf());
 	CreateWICTextureFromFile(device.Get(), L"Resources\\Click to Start.png", nullptr, m_button.ReleaseAndGetAddressOf());
 
@@ -39,6 +40,9 @@ GameTitle::GameTitle(Microsoft::WRL::ComPtr<ID3D11Device> device
 	m_fullscreenRect.top = 0;
 	m_fullscreenRect.right = 800;
 	m_fullscreenRect.bottom = 600;
+
+	m_clickNow = m_mouse->IsClickedLeft();
+	m_clickBefore = m_mouse->IsClickedLeft();
 }
 
 GameTitle::~GameTitle()
@@ -49,10 +53,14 @@ GameTitle::~GameTitle()
 
 void GameTitle::Update()
 {
-	//シーン移動
 	m_mouse->Update();
-	if (m_mouse->IsClickedLeft())
+	
+	m_clickBefore = m_clickNow;
+	m_clickNow = m_mouse->IsClickedLeft();
+
+	if (m_clickBefore == false && m_clickNow == true)
 	{
+		//シーン移動
 		if (m_next != PLAY)
 		{
 			ADX2Le::Play(CRI_GAMEPLAYSOUNDS__CUE_ID_4);
@@ -64,7 +72,7 @@ void GameTitle::Update()
 void GameTitle::Render()
 {
 
-	m_spriteBatch->Begin();
+	m_spriteBatch->Begin(DirectX::SpriteSortMode_Deferred, m_commonStates->NonPremultiplied(), m_commonStates->PointClamp());
 
 	m_spriteBatch->Draw(m_background.Get(), Vector2(0.0f, 0.0f), nullptr, Colors::White, 0.f, m_backorigin, 1.25f);
 	m_spriteBatch->Draw(m_button.Get(), Vector2(m_fullscreenRect.right / 4.0f, m_fullscreenRect.bottom / 1.5f),

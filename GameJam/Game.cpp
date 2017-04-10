@@ -7,6 +7,7 @@
 #include "Classes\21\GamePlay.h"
 #include "Classes\21\GameTitle.h"
 #include "Classes\8\ADX2Le.h"
+#include "Sounds\GamePlaySounds.h"
 
 #pragma comment(lib, "cri_ware_pcx86_LE_import.lib")
 
@@ -28,7 +29,6 @@ Game::Game() :
 Game::~Game()
 {
 	delete m_GameScene;
-	delete m_play;
 
 	ADX2Le::Finalize();
 
@@ -54,8 +54,6 @@ void Game::Initialize(HWND window, int width, int height)
 
 	m_Scene = TITLE;
 	m_GameScene = new GameTitle(m_d3dDevice, m_d3dContext);
-
-	m_play = new GamePlay(m_d3dDevice,m_d3dContext);
 }
 
 // Executes the basic game loop.
