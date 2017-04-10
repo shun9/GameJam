@@ -8,8 +8,8 @@
 #include "..\..\Game.h"
 #include "GamePlay.h"
 
-#include "../8/ADX2Le.h"
-#include "../../Sounds/GamePlaySounds.h"
+#include "..\8\ADX2Le.h"
+#include "..\..\Sounds\GamePlaySounds.h"
 
 
 using namespace std;
@@ -51,6 +51,10 @@ GamePlay::GamePlay(Microsoft::WRL::ComPtr<ID3D11Device> device
 
 	//選択肢の作成
 	CreateOption();
+
+	m_player = new Player(MAP_POS_X+Panel::SIZE,
+						  MAP_POS_Y+Panel::SIZE,
+						  m_device,m_context);
 }
 
 
@@ -78,14 +82,18 @@ void GamePlay::Update()
 	m_mouse->Update();
 
 	//マウスの座標を更新 間に挟むため半分ずらす
-	m_mousePosX = (m_mouse->GetPosX() + m_scrollPos+ (Panel::SIZE / 2)) / Panel::SIZE ;
-	m_mousePosY = m_mouse->GetPosY() / Panel::SIZE;
+	m_mousePosX = (m_mouse->GetPosX() + m_scrollPos+ (Panel::SIZE / 2) - MAP_POS_X) / Panel::SIZE ;
+	m_mousePosY = (m_mouse->GetPosY()-MAP_POS_Y) / Panel::SIZE;
 
 	//ステージ移動
 	UpdateStage();
 
 	//選択肢の更新
 	UpdateOption();
+
+	//プレイヤーの更新
+	UpdatePlayer();
+
 }
 
 //＋ーーーーーーーーーーーーーー＋
@@ -100,6 +108,9 @@ void GamePlay::Render()
 
 	//選択肢の描画
 	DrawOption();
+
+	//プレイヤー描画
+	m_player->Render();
 }
 
 //＋ーーーーーーーーーーーーーー＋
@@ -110,7 +121,7 @@ void GamePlay::Render()
 void GamePlay::UpdateStage()
 {
 	//スクロールする
-	m_scrollPos += 0.2f;
+	m_scrollPos += 0.1f;
 
 	//１パネル分スクロールしたら
 	if (m_scrollPos >= Panel::SIZE)
@@ -155,6 +166,22 @@ void GamePlay::UpdateOption()
 	}
 }
 
+//＋ーーーーーーーーーーーーーー＋
+//｜機能  :プレイヤーの更新
+//｜引数  :なし(void)
+//｜戻り値:なし(void)
+//＋ーーーーーーーーーーーーーー＋
+void GamePlay::UpdatePlayer()
+{
+	m_player->Update();
+
+	DirectX::SimpleMath::Vector2 pos = m_player->getPos();
+	int x = (pos.x + m_scrollPos - MAP_POS_X) / Panel::SIZE;
+	int y = (m_mouse->GetPosY() - MAP_POS_Y) / Panel::SIZE;
+
+	m_player->registerPanel(m_panel[y][x]);
+}
+
 
 //＋ーーーーーーーーーーーーーー＋
 //｜機能  :パネルをセットする
@@ -188,6 +215,8 @@ void GamePlay::FitOption()
 
 	//新しい選択肢を作成
 	m_option[m_numChoosed].panel = new Panel(m_device, m_context, Panel::GetRandomPass());
+
+	LinkPanel();
 }
 
 
@@ -212,6 +241,8 @@ void GamePlay::PanelSlide()
 		//最後尾に新しいパネルを作成
 		m_panel[i][MAP_X - 1] = new Panel(m_device, m_context, Panel::GetRandomPass());
 	}
+
+	LinkPanel();
 }
 
 void GamePlay::CheckGame()
@@ -251,6 +282,45 @@ int GamePlay::ChoosedOption()
 	}
 
 	return option;
+}
+
+//＋ーーーーーーーーーーーーーー＋
+//｜機能  :ステージのパネルを接続する
+//｜引数  :なし(void)
+//｜戻り値:なし(void)
+//＋ーーーーーーーーーーーーーー＋
+void GamePlay::LinkPanel()
+{
+	//パネルを接続する
+	for (int i = 0; i < MAP_Y; i++)
+	{
+		for (int j = 0; j < MAP_X; j++)
+		{
+			//上のパネルを接続
+			if (i - 1 >= 0)
+			{
+				m_panel[i][j]->Register(m_panel[i - 1][j], TOP);
+			}
+
+			//下のパネルを接続
+			if (i + 1 < MAP_Y)
+			{
+				m_panel[i][j]->Register(m_panel[i + 1][j], BOTTOM);
+			}
+
+			//左のパネルを接続
+			if (j - 1 >= 0)
+			{
+				m_panel[i][j]->Register(m_panel[i][j-1], LEFT);
+			}
+
+			//右のパネルを接続
+			if (j + 1 < MAP_X)
+			{
+				m_panel[i][j]->Register(m_panel[i][j+1], RIGHT);
+			}
+		}
+	}
 }
 
 
@@ -317,6 +387,9 @@ void GamePlay::CreateStage()
 			m_panel[i][j] = new Panel(m_device, m_context, Panel::GetRandomPass());
 		}
 	}
+
+	//パネルを接続する
+	LinkPanel();
 }
 
 

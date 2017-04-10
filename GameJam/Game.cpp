@@ -48,14 +48,11 @@ void Game::Initialize(HWND window, int width, int height)
 
     CreateResources();
 
+	m_Scene = TITLE;
+	m_GameScene = new GameTitle(m_d3dDevice, m_d3dContext);
 	//サウンドの初期化
 	ADX2Le::Initialize("Sounds\\GameJam.acf");
 	ADX2Le::LoadAcb("Sounds\\GamePlaySounds.acb", "Sounds\\GamePlaySounds.awb");
-
-
-	m_Scene = PLAY;
-	m_GameScene = new GamePlay(m_d3dDevice,m_d3dContext);
-
 
 	m_play = new GamePlay(m_d3dDevice,m_d3dContext);
 }
@@ -94,9 +91,13 @@ void Game::Update(DX::StepTimer const& timer)
 
 		switch (m_Scene)
 		{
-		case TITLE:m_GameScene = new GameTitle();
+		case TITLE:m_GameScene = new GameTitle(m_d3dDevice, m_d3dContext);
 			break;
+<<<<<<< HEAD
 		case PLAY:m_GameScene = new GamePlay(m_d3dDevice,m_d3dContext);
+=======
+		case PLAY:m_GameScene = new GamePlay(m_d3dDevice, m_d3dContext);
+>>>>>>> 33cf137ad88dc2d60e5d131307422f78894dae9a
 			break;
 		}
 	}
@@ -123,8 +124,6 @@ void Game::Render()
 
     // TODO: Add your rendering code here.
 	//ここから下に記述
-
-	//m_play->Render();
 	m_GameScene->Render();
 	//ここから上に記述
 	Present();

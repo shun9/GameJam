@@ -15,10 +15,17 @@ using namespace DirectX::SimpleMath;
 //!
 //! @return ‚È‚µ
 //----------------------------------------------------------------------
+<<<<<<< HEAD
 Player::Player(float x, float y, Microsoft::WRL::ComPtr<ID3D11Device> device,
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> context)
 	:m_device(device)
 	, m_deviceContext(context)
+=======
+Player::Player(float x, float y	,Microsoft::WRL::ComPtr<ID3D11Device> device,
+	Microsoft::WRL::ComPtr<ID3D11DeviceContext> context)
+	:m_device(device)
+	,m_deviceContext(context)
+>>>>>>> 3899fc73ce62e7b6130a7e3b3a399583b1eeb0c6
 {
 	m_sprite = std::unique_ptr<DirectX::SpriteBatch>(new SpriteBatch(m_deviceContext.Get()));
 

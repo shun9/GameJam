@@ -9,7 +9,15 @@
 #include "SpriteBatch.h"
 #include "WICTextureLoader.h"
 #include <wrl.h>
+<<<<<<< HEAD
 #include "../8/Panel.h"
+=======
+<<<<<<< HEAD
+#include "..\8\Panel.h"
+=======
+#include "../8/Panel.h"
+>>>>>>> 33cf137ad88dc2d60e5d131307422f78894dae9a
+>>>>>>> 3899fc73ce62e7b6130a7e3b3a399583b1eeb0c6
 
 class Player
 {
@@ -32,8 +40,16 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11Device> m_device;
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> m_deviceContext;
 
+
+	Microsoft::WRL::ComPtr<ID3D11Device> m_device;
+	Microsoft::WRL::ComPtr<ID3D11DeviceContext> m_deviceContext;
+
 public:
+<<<<<<< HEAD
 	Player(float x, float y,
+=======
+	Player(float x, float y, 
+>>>>>>> 3899fc73ce62e7b6130a7e3b3a399583b1eeb0c6
 		Microsoft::WRL::ComPtr<ID3D11Device> device,
 		Microsoft::WRL::ComPtr<ID3D11DeviceContext> context);
 
@@ -43,4 +59,8 @@ public:
 	void registerPanel(Panel* panel);	//プレイヤーの位置にあるパネルを登録する関数
 
 	DirectX::SimpleMath::Vector2 getPos() { return m_pos; }
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> 3899fc73ce62e7b6130a7e3b3a399583b1eeb0c6

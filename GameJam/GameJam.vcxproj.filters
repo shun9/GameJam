@@ -14,6 +14,13 @@
     <Filter Include="Classes\21">
       <UniqueIdentifier>{45bb07b6-2b15-4191-a6b8-a77706bce715}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\20">
+<<<<<<< HEAD
+      <UniqueIdentifier>{47444358-1a36-4f20-855f-836106a595e9}</UniqueIdentifier>
+=======
+      <UniqueIdentifier>{57e188d1-4c59-46d9-b11b-5863ce3164ea}</UniqueIdentifier>
+>>>>>>> 33cf137ad88dc2d60e5d131307422f78894dae9a
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -37,6 +44,9 @@
     <ClInclude Include="Classes\8\ADX2Le.h">
       <Filter>Classes\8</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\20\Player.h">
+      <Filter>Classes\20</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -56,6 +66,9 @@
     </ClCompile>
     <ClCompile Include="Classes\8\ADX2Le.cpp">
       <Filter>Classes\8</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\20\Player.cpp">
+      <Filter>Classes\20</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
