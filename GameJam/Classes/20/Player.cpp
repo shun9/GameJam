@@ -15,12 +15,12 @@ using namespace DirectX::SimpleMath;
 //!
 //! @return ‚È‚µ
 //----------------------------------------------------------------------
-Player::Player(float x, float y)
+Player::Player(float x, float y	,Microsoft::WRL::ComPtr<ID3D11Device> device,
+	Microsoft::WRL::ComPtr<ID3D11DeviceContext> context)
+	:m_device(device)
+	,m_deviceContext(context)
 {
-	ComPtr<ID3D11Device> device;
-	ComPtr<ID3D11DeviceContext> deviceContext;
-
-	m_sprite = std::unique_ptr<DirectX::SpriteBatch>(new SpriteBatch(deviceContext.Get()));
+	m_sprite = std::unique_ptr<DirectX::SpriteBatch>(new SpriteBatch(m_deviceContext.Get()));
 
 	m_pos.x = x;
 	m_pos.y = y;
@@ -30,9 +30,9 @@ Player::Player(float x, float y)
 	m_direction = 5;
 	m_work_num = 0;
 
-	CreateWICTextureFromFile(device.Get(), L"Resources\\player.png", nullptr, m_texture[0].ReleaseAndGetAddressOf());
-	CreateWICTextureFromFile(device.Get(), L"Resources\\player1.png", nullptr, m_texture[1].ReleaseAndGetAddressOf());
-	CreateWICTextureFromFile(device.Get(), L"Resources\\player2.png", nullptr, m_texture[2].ReleaseAndGetAddressOf());
+	CreateWICTextureFromFile(m_device.Get(), L"Resources\\player.png", nullptr, m_texture[0].ReleaseAndGetAddressOf());
+	CreateWICTextureFromFile(m_device.Get(), L"Resources\\player1.png", nullptr, m_texture[1].ReleaseAndGetAddressOf());
+	CreateWICTextureFromFile(m_device.Get(), L"Resources\\player2.png", nullptr, m_texture[2].ReleaseAndGetAddressOf());
 
 	m_texture_num = 0;
 }

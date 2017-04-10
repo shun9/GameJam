@@ -9,7 +9,11 @@
 #include "SpriteBatch.h"
 #include "WICTextureLoader.h"
 #include <wrl.h>
+<<<<<<< HEAD
 #include "..\8\Panel.h"
+=======
+#include "../8/Panel.h"
+>>>>>>> 33cf137ad88dc2d60e5d131307422f78894dae9a
 
 class Player
 {
@@ -28,10 +32,19 @@ private:
 	void work();						//プレイヤーを動かす関数
 	void changeTexture();				//プレイヤーの画像を変更する関数
 
+
+	Microsoft::WRL::ComPtr<ID3D11Device> m_device;
+	Microsoft::WRL::ComPtr<ID3D11DeviceContext> m_deviceContext;
+
 public:
-	Player(float x, float y);
+	Player(float x, float y, 
+		Microsoft::WRL::ComPtr<ID3D11Device> device,
+		Microsoft::WRL::ComPtr<ID3D11DeviceContext> context);
+
 	~Player();
 	void Update();
 	void Render();
 	void registerPanel(Panel* panel);	//プレイヤーの位置にあるパネルを登録する関数
+
+	DirectX::SimpleMath::Vector2 getPos() { return m_pos; }
 };

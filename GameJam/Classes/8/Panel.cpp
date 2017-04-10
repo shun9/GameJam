@@ -97,7 +97,7 @@ Panel::Panel(Microsoft::WRL::ComPtr<ID3D11Device> device
 	m_canPass[LEFT]   = pass.left;
 	m_canPass[RIGHT]  = pass.right;
 
-	//隣接するパネル
+	//隣接するパネル 上下左右
 	for (int i = 0; i < 4; i++)
 	{
 		m_linkPanel[i] = nullptr;
