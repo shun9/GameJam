@@ -14,11 +14,7 @@
 
 using namespace DirectX;
 using namespace std;
-<<<<<<< HEAD
 using namespace SimpleMath;
-=======
-using namespace DirectX;
->>>>>>> last
 
 const int GamePlay::MAP_Y             = 3;
 const int GamePlay::MAP_X             = 8;
@@ -44,10 +40,7 @@ GamePlay::GamePlay(Microsoft::WRL::ComPtr<ID3D11Device> device
 	, m_score(0)
 	, m_isGameOver(false)
 {	
-
 	m_spriteBatch = std::make_unique<SpriteBatch>(m_context.Get());
-	CreateWICTextureFromFile(device.Get(), L"Resources\\Result.png", nullptr, m_result.ReleaseAndGetAddressOf());
-	CreateWICTextureFromFile(device.Get(), L"Resources\\BacktoTitle.png", nullptr, m_result2.ReleaseAndGetAddressOf());
 
 	//次のシーン
 	m_next = PLAY;
@@ -84,17 +77,8 @@ GamePlay::GamePlay(Microsoft::WRL::ComPtr<ID3D11Device> device
 	//選択肢の作成
 	CreateOption();
 
-<<<<<<< HEAD
-	//座標設定
-	m_resultPos.x = float(0);
-	m_resultPos.y = float(0);
-
-	m_player = new Player(MAP_POS_X+Panel::SIZE,
-						  MAP_POS_Y+Panel::SIZE,
-=======
 	m_player = new Player(MAP_POS_X+Panel::SIZE+20,
 						  MAP_POS_Y+Panel::SIZE+MAP_POS_Y,
->>>>>>> last
 						  m_device,m_context);
 }
 
@@ -186,15 +170,6 @@ void GamePlay::Render()
 	//プレイヤー描画
 	m_player->Render();
 
-<<<<<<< HEAD
-	if (m_isGameOver)
-	{
-		m_spriteBatch->Begin();
-		m_spriteBatch->Draw(m_result.Get(), Vector2(100.0f, 50.0f), nullptr, Colors::White, 0.f, m_resultPos);
-		m_spriteBatch->Draw(m_result2.Get(), Vector2(190.0f, 450.0f), nullptr, Colors::White, 0.f, m_resultPos2);
-		m_spriteBatch->End();
-	}
-=======
 
 
 	//描画開始
@@ -213,8 +188,6 @@ void GamePlay::Render()
 	}
 
 	m_sprite->End();
-
->>>>>>> last
 }
 
 //＋ーーーーーーーーーーーーーー＋
@@ -383,20 +356,14 @@ bool GamePlay::IsDead()
 //＋ーーーーーーーーーーーーーー＋
 void GamePlay::GameOver()
 {
-<<<<<<< HEAD
-	if (m_mouse->IsClickedLeft())
-	{
-		if (m_next != PLAY)
-		{
-			ADX2Le::Play(CRI_GAMEPLAYSOUNDS__CUE_ID_4);
-		}
-		m_next = TITLE;
-	}
-=======
 	if (m_cntTime >= 60)
 	{
 		if (m_mouse->IsClickedLeft())
 		{
+			if (m_next != PLAY)
+			{
+				ADX2Le::Play(CRI_GAMEPLAYSOUNDS__CUE_ID_4);
+			}
 			m_next = TITLE;
 		}
 	}
@@ -447,7 +414,6 @@ void GamePlay::DivideScore()
 
 	m_scoreDigit[2] = digit1;
 
->>>>>>> last
 }
 
 //＋ーーーーーーーーーーーーーー＋

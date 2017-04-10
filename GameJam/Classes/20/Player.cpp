@@ -125,14 +125,9 @@ void Player::work()
 	//プレイヤーが動いていない場合
 	if (m_state == false)
 	{
-<<<<<<< HEAD
-		//動けるかどうかを確認
-		for (int direction = 3; direction > -1; direction--)
-=======
 		m_state = false;
 		int dir = m_direction;
 		if (isWork(TOP))
->>>>>>> last
 		{
 			if (isDirection(TOP, dir) == true)
 			{

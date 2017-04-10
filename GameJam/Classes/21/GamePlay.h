@@ -72,9 +72,6 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_stage;
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_backToTitle;
 
-	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_result;
-	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_result2;
-
 	//スプライト描画
 	std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;
 
