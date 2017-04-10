@@ -1,0 +1,12 @@
+diff a/GameJam/Classes/21/GamePlay.h b/GameJam/Classes/21/GamePlay.h	(rejected hunks)
+@@ -8,7 +8,12 @@
+ #include <vector>
+ #include "GameScene.h"
+ #include "..\8\Panel.h"
+
++#include "../8/MouseManager.h"
++#include "../20/Player.h"
+
+ 
+ struct OPTION
+ {

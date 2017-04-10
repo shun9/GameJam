@@ -1,0 +1,11 @@
+diff a/GameJam/GameJam.vcxproj.filters b/GameJam/GameJam.vcxproj.filters	(rejected hunks)
+@@ -15,7 +15,11 @@
+       <UniqueIdentifier>{45bb07b6-2b15-4191-a6b8-a77706bce715}</UniqueIdentifier>
+     </Filter>
+     <Filter Include="Classes\20">
+
+       <UniqueIdentifier>{47444358-1a36-4f20-855f-836106a595e9}</UniqueIdentifier>
+
+     </Filter>
+   </ItemGroup>
+   <ItemGroup>

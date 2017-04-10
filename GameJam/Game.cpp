@@ -6,6 +6,9 @@
 #include "Game.h"
 #include "Classes\21\GamePlay.h"
 #include "Classes\21\GameTitle.h"
+#include "Classes\8\ADX2Le.h"
+
+#pragma comment(lib, "cri_ware_pcx86_LE_import.lib")
 
 extern void ExitGame();
 
@@ -13,7 +16,6 @@ using namespace DirectX;
 
 using Microsoft::WRL::ComPtr;
 
-GameScene* m_GameScene;
 
 Game::Game() :
     m_window(0),
@@ -26,6 +28,9 @@ Game::Game() :
 Game::~Game()
 {
 	delete m_GameScene;
+	delete m_play;
+
+	ADX2Le::Finalize();
 
 }
 
@@ -44,7 +49,12 @@ void Game::Initialize(HWND window, int width, int height)
     CreateResources();
 
 	m_Scene = TITLE;
-	m_GameScene = new GameTitle();
+	m_GameScene = new GameTitle(m_d3dDevice, m_d3dContext);
+	//サウンドの初期化
+	ADX2Le::Initialize("Sounds\\GameJam.acf");
+	ADX2Le::LoadAcb("Sounds\\GamePlaySounds.acb", "Sounds\\GamePlaySounds.awb");
+
+	m_play = new GamePlay(m_d3dDevice,m_d3dContext);
 }
 
 // Executes the basic game loop.
@@ -70,23 +80,26 @@ void Game::Update(DX::StepTimer const& timer)
     // TODO: Add your game logic here.
 	//ここから下に記述
 
+	ADX2Le::Update();
+
 	//シーン管理
 	if (m_GameScene->m_next != m_Scene)
 	{
 		m_Scene = m_GameScene->m_next;
 		//シーン削除
 		delete m_GameScene;
-		m_GameScene = nullptr;
+
 		switch (m_Scene)
 		{
-		case TITLE:m_GameScene = new GameTitle();
+		case TITLE:m_GameScene = new GameTitle(m_d3dDevice, m_d3dContext);
 			break;
-		case PLAY:m_GameScene = new GamePlay();
+		case PLAY:
+			m_GameScene = new GamePlay(m_d3dDevice, m_d3dContext);
 			break;
 		}
 	}
 	m_GameScene->Update();
-
+	//m_play->Update();
 	//ここから上に記述
     elapsedTime;
 }
@@ -108,8 +121,7 @@ void Game::Render()
 
     // TODO: Add your rendering code here.
 	//ここから下に記述
-
-
+	m_GameScene->Render();
 	//ここから上に記述
 	Present();
 }
