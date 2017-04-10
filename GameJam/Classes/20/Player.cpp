@@ -25,9 +25,16 @@ Player::Player(float x, float y)
 	m_pos.x = x;
 	m_pos.y = y;
 
+	m_panel = nullptr;
+	m_state = false;
+	m_direction = 5;
+	m_work_num = 0;
+
 	CreateWICTextureFromFile(device.Get(), L"Resources\\player.png", nullptr, m_texture[0].ReleaseAndGetAddressOf());
 	CreateWICTextureFromFile(device.Get(), L"Resources\\player1.png", nullptr, m_texture[1].ReleaseAndGetAddressOf());
 	CreateWICTextureFromFile(device.Get(), L"Resources\\player2.png", nullptr, m_texture[2].ReleaseAndGetAddressOf());
+
+	m_texture_num = 0;
 }
 
 //----------------------------------------------------------------------
