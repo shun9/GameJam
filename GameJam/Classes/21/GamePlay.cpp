@@ -37,9 +37,6 @@ GamePlay::GamePlay(Microsoft::WRL::ComPtr<ID3D11Device> device
 	, m_score(0)
 	, m_isGameOver(false)
 {	
-	//サウンドの初期化
-	ADX2Le::LoadAcb("Sounds\\GamePlaySounds.acb", "Sounds\\GamePlaySounds.awb");
-	ADX2Le::Play(CRI_GAMEPLAYSOUNDS__CUE_ID_1);
 
 	//次のシーン
 	m_next = PLAY;
@@ -272,6 +269,7 @@ bool GamePlay::IsDead()
 	||  pos.y < -Panel::SIZE / 2 + MAP_POS_Y
 	||  pos.y >  Panel::SIZE * MAP_Y + Panel::SIZE / 2)
 	{
+		ADX2Le::Play(CRI_GAMEPLAYSOUNDS_FALL);
 		return true;
 	}
 
