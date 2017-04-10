@@ -85,6 +85,7 @@ void GamePlay::Update()
 	m_mousePosX = (m_mouse->GetPosX() + m_scrollPos+ (Panel::SIZE / 2) - MAP_POS_X) / Panel::SIZE ;
 	m_mousePosY = (m_mouse->GetPosY()-MAP_POS_Y) / Panel::SIZE;
 
+	if(m_)
 	//ステージ移動
 	UpdateStage();
 
@@ -251,7 +252,10 @@ void GamePlay::CheckGame()
 
 void GamePlay::GameOver()
 {
-	m_next = TITLE;
+	if (m_mouse->IsClickedLeft())
+	{
+		m_next = TITLE;
+	}
 }
 
 //＋ーーーーーーーーーーーーーー＋
