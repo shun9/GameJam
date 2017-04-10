@@ -68,7 +68,7 @@ private:
 	//スコア
 	int m_score;
 
-	bool m_isGameover;
+	bool m_isGameOver;
 
 	/*--メンバ関数--*/
 public:

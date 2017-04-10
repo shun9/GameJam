@@ -35,7 +35,7 @@ GamePlay::GamePlay(Microsoft::WRL::ComPtr<ID3D11Device> device
 	, m_scrollPos(0)
 	, m_numChoosed(-1)
 	, m_score(0)
-	, m_isGameover(false)
+	, m_isGameOver(false)
 {	
 
 	//ŽŸ‚ÌƒV[ƒ“
@@ -89,7 +89,7 @@ void GamePlay::Update()
 	m_mousePosX = (m_mouse->GetPosX() + m_scrollPos+ (Panel::SIZE / 2) - MAP_POS_X) / Panel::SIZE ;
 	m_mousePosY = (m_mouse->GetPosY()-MAP_POS_Y) / Panel::SIZE;
 
-	if (m_isGameover)
+	if (m_isGameOver)
 	{
 		GameOver();
 		return;
