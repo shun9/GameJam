@@ -163,10 +163,6 @@
     <ClInclude Include="Classes\21\GamePlay.h" />
     <ClInclude Include="Classes\21\GameScene.h" />
     <ClInclude Include="Classes\21\GameTitle.h" />
-<<<<<<< HEAD
-    <ClInclude Include="Classes\8\ADX2Le.h" />
-=======
->>>>>>> 904c7b17d5e2b6a14be1d5a084a2559150156735
     <ClInclude Include="Classes\8\MouseManager.h" />
     <ClInclude Include="Classes\8\Panel.h" />
     <ClInclude Include="Game.h" />
