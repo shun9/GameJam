@@ -18,11 +18,7 @@ GameTitle::~GameTitle()
 
 void GameTitle::Update()
 {
-	auto state = m_mouse->GetState();
-	if (state.leftButton)
-	{
-		m_next = PLAY;
-	}
+
 }
 
 void GameTitle::Render()
