@@ -36,9 +36,6 @@ GamePlay::GamePlay(Microsoft::WRL::ComPtr<ID3D11Device> device
 	, m_numChoosed(-1)
 	, m_score(0)
 {	
-	//サウンドの初期化
-	ADX2Le::LoadAcb("Sounds\\GamePlaySounds.acb", "Sounds\\GamePlaySounds.awb");
-	ADX2Le::Play(CRI_GAMEPLAYSOUNDS__CUE_ID_1);
 
 	//次のシーン
 	m_next = PLAY;
@@ -247,6 +244,18 @@ void GamePlay::PanelSlide()
 
 void GamePlay::CheckGame()
 {
+	DirectX::SimpleMath::Vector2 pos = m_player->getPos();
+
+	//画面左端、上端、下端に出たらゲームオーバー
+	if (pos.x < -Panel::SIZE / 2
+	||  pos.y < -Panel::SIZE / 2 + MAP_POS_Y
+	||  pos.y >  Panel::SIZE * MAP_Y + Panel::SIZE / 2)
+	{
+		ADX2Le::Play(CRI_GAMEPLAYSOUNDS_FALL);
+		return true;
+	}
+
+	return false;
 }
 
 void GamePlay::GameOver()
