@@ -6,6 +6,9 @@
 
 #pragma once
 #include <vector>
+#include <SpriteBatch.h>
+#include <wrl.h>
+#include "WICTextureLoader.h"
 #include "GameScene.h"
 #include "..\8\Panel.h"
 
@@ -61,6 +64,11 @@ private:
 	//デバイス関連
 	Microsoft::WRL::ComPtr<ID3D11Device> m_device;
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> m_context;
+
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_result;
+
+	//スプライト描画
+	std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;
 
 	//スコア
 	int m_score;

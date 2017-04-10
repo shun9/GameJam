@@ -41,6 +41,9 @@ GamePlay::GamePlay(Microsoft::WRL::ComPtr<ID3D11Device> device
 	ADX2Le::LoadAcb("Sounds\\GamePlaySounds.acb", "Sounds\\GamePlaySounds.awb");
 	ADX2Le::Play(CRI_GAMEPLAYSOUNDS__CUE_ID_1);
 
+	m_spriteBatch = std::make_unique<SpriteBatch>(context.Get());
+	CreateWICTextureFromFile(device.Get(), L"Resources\\title.png", nullptr, m_background.ReleaseAndGetAddressOf());
+
 	//次のシーン
 	m_next = PLAY;
 
@@ -89,6 +92,11 @@ void GamePlay::Update()
 	//ステージ移動
 	UpdateStage();
 
+	if (m_isGameOver)
+	{
+		GameOver();
+		return;
+	}
 	//選択肢の更新
 	UpdateOption();
 
@@ -112,6 +120,14 @@ void GamePlay::Render()
 
 	//プレイヤー描画
 	m_player->Render();
+
+	if (m_isGameOver)
+	{
+		m_spriteBatch->Begin();
+		m_spriteBatch->Draw(m_button.Get(), Vector2(m_fullscreenRect.right / 4.0f, m_fullscreenRect.bottom / 1.5f),
+			nullptr, Colors::White, 0.f, m_buttonorigin);
+		m_spriteBatch->End();
+	}
 }
 
 //＋ーーーーーーーーーーーーーー＋
@@ -259,11 +275,15 @@ bool GamePlay::IsDead()
 	{
 
 	}
+	return 0;
 }
 
 void GamePlay::GameOver()
 {
-	m_next = TITLE;
+	if (m_mouse->IsClickedLeft())
+	{
+		m_next = TITLE;
+	}
 }
 
 //＋ーーーーーーーーーーーーーー＋
