@@ -164,7 +164,7 @@ bool Panel::CanPass(int direction)
 	}
 
 	//—×Ú‚·‚éƒpƒlƒ‹‚É“¹‚ª–³‚¯‚ê‚Îi‚ß‚È‚¢
-	if (!CanPassLinkPanel(direction))
+	if (CanPassLinkPanel(direction)==false)
 	{
 		return false;
 	}
