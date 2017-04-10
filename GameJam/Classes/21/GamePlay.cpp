@@ -35,7 +35,6 @@ GamePlay::GamePlay(Microsoft::WRL::ComPtr<ID3D11Device> device
 	, m_scrollPos(0)
 	, m_numChoosed(-1)
 	, m_score(0)
-	, m_isGameOver(false)
 {	
 	//サウンドの初期化
 	ADX2Le::LoadAcb("Sounds\\GamePlaySounds.acb", "Sounds\\GamePlaySounds.awb");
@@ -174,13 +173,13 @@ void GamePlay::UpdateOption()
 //＋ーーーーーーーーーーーーーー＋
 void GamePlay::UpdatePlayer()
 {
-	m_player->Update();
-
 	DirectX::SimpleMath::Vector2 pos = m_player->getPos();
 	int x = (pos.x + m_scrollPos - MAP_POS_X) / Panel::SIZE;
 	int y = (pos.y - MAP_POS_Y) / Panel::SIZE;
 
 	m_player->registerPanel(m_panel[y][x]);
+
+	m_player->Update();
 }
 
 
@@ -246,19 +245,8 @@ void GamePlay::PanelSlide()
 	LinkPanel();
 }
 
-//＋ーーーーーーーーーーーーーー＋
-//｜機能  :ゲームオーバー判定
-//｜引数  :なし(void)
-//｜戻り値:ゲームオーバーでtrue(bool)
-//＋ーーーーーーーーーーーーーー＋
-bool GamePlay::IsDead()
+void GamePlay::CheckGame()
 {
-	DirectX::SimpleMath::Vector2 pos = m_player->getPos();
-
-	if (pos.x < -Panel::SIZE / 2)
-	{
-
-	}
 }
 
 void GamePlay::GameOver()

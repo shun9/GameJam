@@ -8,9 +8,7 @@
 #include <vector>
 #include "GameScene.h"
 #include "..\8\Panel.h"
-
 #include "../8/MouseManager.h"
-
 #include "../20/Player.h"
 
 struct OPTION
@@ -65,9 +63,6 @@ private:
 	//スコア
 	int m_score;
 
-	//ゲームオーバーフラグ
-	bool m_isGameOver;
-
 	/*--メンバ関数--*/
 public:
 	GamePlay(Microsoft::WRL::ComPtr<ID3D11Device> device
@@ -86,7 +81,7 @@ private:
 	//ゲームシステム関連
 	void FitOption();
 	void PanelSlide();
-	bool IsDead();
+	void CheckGame();
 	void GameOver();
 	
 	//選んだ選択肢を取得する
