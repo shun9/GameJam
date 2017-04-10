@@ -6,20 +6,23 @@
 
 #pragma once
 
-#include"..\..\StepTimer.h"
-#include"..\..\Game.h"
+#include "..\..\StepTimer.h"
+#include "..\..\Game.h"
 #include "GameScene.h"
 #include "..\8\Panel.h"
+#include "string"
 
-const wchar_t PanelName[7]
+using namespace std;
+
+const wchar_t* PanelName[]
 = {
-	L'../../Resources/Road1.png',
-	L'../../Resources/Road2.png',
-	L'../../Resources/Road3.png',
-	L'../../Resources/Road4.png',
-	L'../../Resources/Road5.png',
-	L'../../Resources/Road6.png',
-	L'../../Resources/Road7.png',
+	L"../../Resources/Road1.png",
+	L"../../Resources/Road2.png",
+	L"../../Resources/Road3.png",
+	L"../../Resources/Road4.png",
+	L"../../Resources/Road5.png",
+	L"../../Resources/Road6.png",
+	L"../../Resources/Road7.png",
 };
 
 class GamePlay : public GameScene
