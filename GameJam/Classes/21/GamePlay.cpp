@@ -76,11 +76,12 @@ GamePlay::~GamePlay()
 //＋ーーーーーーーーーーーーーー＋
 void GamePlay::Update()
 {
+	//マウス更新
+	m_mouse->Update();
+	
 	//ゲーム進行中の処理
 	if (!m_isGameOver)
 	{
-	//マウス更新
-	m_mouse->Update();
 
 	//マウスの座標を更新 間に挟むため半分ずらす
 	m_mousePosX = (m_mouse->GetPosX() + m_scrollPos+ (Panel::SIZE / 2) - MAP_POS_X) / Panel::SIZE ;

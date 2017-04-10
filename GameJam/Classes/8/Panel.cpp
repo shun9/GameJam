@@ -151,7 +151,7 @@ void Panel::Register(Panel* panel, int direction)
 bool Panel::CanPass(int direction)
 {
 	//自身に道が無ければ進めない
-	if (!m_canPass[direction])
+	if (m_canPass[direction] == false)
 	{
 		return false;
 	}
@@ -160,7 +160,7 @@ bool Panel::CanPass(int direction)
 	//指定方向にパネルが無ければ進めない
 	if (m_linkPanel[direction] == nullptr)
 	{
-		return false;
+		return true;
 	}
 
 	//隣接するパネルに道が無ければ進めない
