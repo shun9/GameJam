@@ -271,10 +271,10 @@ bool GamePlay::IsDead()
 	||  pos.y >  Panel::SIZE * MAP_Y + Panel::SIZE / 2)
 	{
 		ADX2Le::Play(CRI_GAMEPLAYSOUNDS_FALL);
-		return true;
+		//return true;
 	}
 
-	return false;
+	//return false;
 }
 
 void GamePlay::GameOver()
