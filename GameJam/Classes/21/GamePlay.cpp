@@ -35,6 +35,7 @@ GamePlay::GamePlay(Microsoft::WRL::ComPtr<ID3D11Device> device
 	, m_scrollPos(0)
 	, m_numChoosed(-1)
 	, m_score(0)
+	, m_isGameOver(false)
 {	
 
 	//次のシーン
@@ -75,6 +76,9 @@ GamePlay::~GamePlay()
 //＋ーーーーーーーーーーーーーー＋
 void GamePlay::Update()
 {
+	//ゲーム進行中の処理
+	if (!m_isGameOver)
+	{
 	//マウス更新
 	m_mouse->Update();
 
@@ -82,7 +86,6 @@ void GamePlay::Update()
 	m_mousePosX = (m_mouse->GetPosX() + m_scrollPos+ (Panel::SIZE / 2) - MAP_POS_X) / Panel::SIZE ;
 	m_mousePosY = (m_mouse->GetPosY()-MAP_POS_Y) / Panel::SIZE;
 
-	if(m_)
 	//ステージ移動
 	UpdateStage();
 
@@ -92,6 +95,15 @@ void GamePlay::Update()
 	//プレイヤーの更新
 	UpdatePlayer();
 
+	//ゲームオーバー判定
+	m_isGameOver = IsDead();
+	}
+
+	//ゲームオーバー中の処理
+	if (m_isGameOver)
+	{
+		GameOver();
+	}
 }
 
 //＋ーーーーーーーーーーーーーー＋
@@ -243,7 +255,12 @@ void GamePlay::PanelSlide()
 	LinkPanel();
 }
 
-void GamePlay::CheckGame()
+//＋ーーーーーーーーーーーーーー＋
+//｜機能  :ゲームオーバー判定
+//｜引数  :なし(void)
+//｜戻り値:ゲームオーバーでtrue(bool)
+//＋ーーーーーーーーーーーーーー＋
+bool GamePlay::IsDead()
 {
 	DirectX::SimpleMath::Vector2 pos = m_player->getPos();
 
@@ -261,10 +278,7 @@ void GamePlay::CheckGame()
 
 void GamePlay::GameOver()
 {
-	if (m_mouse->IsClickedLeft())
-	{
-		m_next = TITLE;
-	}
+	m_next = TITLE;
 }
 
 //＋ーーーーーーーーーーーーーー＋

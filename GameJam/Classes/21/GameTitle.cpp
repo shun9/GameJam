@@ -20,19 +20,18 @@ GameTitle::GameTitle(Microsoft::WRL::ComPtr<ID3D11Device> device
 	ADX2Le::Play(CRI_GAMEPLAYSOUNDS__CUE_ID_5);
 
 	m_next = TITLE;
+
+	//マウスの取得
 	m_mouse = MouseManager::GetInstance();
 
 	m_spriteBatch = std::make_unique<SpriteBatch>(deviceContext.Get());
-
-	//m_sprite = std::make_unique<SpriteBatch>(deviceContext.Get());
 	CreateWICTextureFromFile(device.Get(), L"Resources\\title.png", nullptr, m_background.ReleaseAndGetAddressOf());
-	CreateWICTextureFromFile(device.Get(), L"Resources\\Click to Start.png", nullptr, m_button.ReleaseAndGetAddressOf());
 
-	m_backorigin.x = float(0);
-	m_backorigin.y = float(0);
-	m_buttonorigin.x = float(0);
-	m_buttonorigin.y = float(0);
+	//座標設定
+	m_origin.x = float(0);
+	m_origin.y = float(0);
 
+	//矩形の設定
 	m_fullscreenRect.left = 0;
 	m_fullscreenRect.top = 0;
 	m_fullscreenRect.right = 800;
@@ -47,6 +46,7 @@ GameTitle::~GameTitle()
 
 void GameTitle::Update()
 {
+	//シーン移動
 	m_mouse->Update();
 	if (m_mouse->IsClickedLeft())
 	{
@@ -60,11 +60,10 @@ void GameTitle::Update()
 
 void GameTitle::Render()
 {
+
 	m_spriteBatch->Begin();
 
-	m_spriteBatch->Draw(m_background.Get(), Vector2(0.0f, 0.0f), nullptr, Colors::White, 0.f, m_backorigin,1.25f);
-	m_spriteBatch->Draw(m_button.Get(), Vector2(m_fullscreenRect.right / 4.0f, m_fullscreenRect.bottom / 1.5f),
-		nullptr, Colors::White, 0.f, m_buttonorigin);
+	m_spriteBatch->Draw(m_background.Get(), m_screenPos, nullptr, Colors::White,0.f, m_origin);
 
 	m_spriteBatch->End();
 }
