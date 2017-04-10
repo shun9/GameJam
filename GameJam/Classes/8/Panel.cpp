@@ -16,13 +16,13 @@ const int Panel::SIZE         = 128;
 const int Panel::MAX_PASS_NUM = 7;
 
 //パス一覧
-const PanelPass Panel::passTopRight		= { true, false,false,true,  L"Resources\\Road3.png" };
-const PanelPass Panel::passTopLeft		= { true, false,true, false, L"Resources\\Road4.png" };
-const PanelPass Panel::passBottomRight	= { false,true, false,true,  L"Resources\\Road5.png" };
-const PanelPass Panel::passBottomLeft	= { false,true, true, false, L"Resources\\Road6.png" };
-const PanelPass Panel::passRightLeft	= { false,false,true, true,  L"Resources\\Road1.png" };
-const PanelPass Panel::passTopBottom	= { true, true, false,false, L"Resources\\Road2.png" };
-const PanelPass Panel::passNone			= { false,false,false,false, L"Resources\\Road7.png" };
+const PanelPass Panel::passTopRight    = { true, false,false,true,  L"Resources\\Road3.png" };
+const PanelPass Panel::passTopLeft     = { true, false,true, false, L"Resources\\Road4.png" };
+const PanelPass Panel::passBottomRight = { false,true, false,true, L"Resources\\Road5.png" };
+const PanelPass Panel::passBottomLeft  = { false,true, true, false, L"Resources\\Road6.png" };
+const PanelPass Panel::passRightLeft   = { false,false,true, true,  L"Resources\\Road1.png" };
+const PanelPass Panel::passTopBottom   = { true, true, false,false, L"Resources\\Road2.png" };
+const PanelPass Panel::passNone        = { false,false,false,false, L"Resources\\Road7.png" };
 
 //＋ーーーーーーーーーーーーーー＋
 //｜機能  :パネルのパスをランダムに返す
@@ -151,7 +151,7 @@ void Panel::Register(Panel* panel, int direction)
 bool Panel::CanPass(int direction)
 {
 	//自身に道が無ければ進めない
-	if (!m_canPass[direction])
+	if (m_canPass[direction] == false)
 	{
 		return false;
 	}
@@ -160,11 +160,11 @@ bool Panel::CanPass(int direction)
 	//指定方向にパネルが無ければ進めない
 	if (m_linkPanel[direction] == nullptr)
 	{
-		return false;
+		return true;
 	}
 
 	//隣接するパネルに道が無ければ進めない
-	if (!CanPassLinkPanel(direction))
+	if (CanPassLinkPanel(direction)==false)
 	{
 		return false;
 	}

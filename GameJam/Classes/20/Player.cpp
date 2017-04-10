@@ -87,7 +87,7 @@ void Player::Render()
 //----------------------------------------------------------------------
 int Player::isWork(int direction)
 {
-	//パネルの情報が入っていなければその状態を返す
+	//進めるならその方向を返す
 	if (m_panel->CanPass(direction) == true)
 	{
 		return direction;
@@ -115,10 +115,14 @@ void Player::work()
 		{
 			if (isWork(direction) < 4)
 			{
-				m_state = true;
-				m_direction = direction;
+				if (isDirection(direction, m_direction) == true)
+				{
+					m_state = true;
+					m_direction = direction;
+					break;
+				}
 			}
-			else if (isWork(direction) == 4)
+			else
 			{
 				m_state = false;
 			}
@@ -166,7 +170,7 @@ void Player::work()
 }
 
 //----------------------------------------------------------------------
-//! @brief プレイヤーの位置にあるパネルを登録する関数
+//! @brief プレイヤーの位置にあるパネルと前回乗っていたパネルを登録する関数
 //!
 //! @param[in] なし
 //!
@@ -248,4 +252,46 @@ void Player::compelMove()
 		}
 	}
 
+}
+
+//----------------------------------------------------------------------
+//! @brief 前回の方向と今から動く方向を比べる関数
+//!
+//! @param[in] 今の方向、前回の方向
+//!
+//! @return 前回来た方向と同じ方向ならfalse、同じでないならtrue
+//----------------------------------------------------------------------
+bool Player::isDirection(int direction, int old_direction)
+{
+	switch (direction)
+	{
+	case TOP:
+		if (old_direction == BOTTOM)
+		{
+			return false;
+		}
+		break;
+	case BOTTOM:
+		if (old_direction == TOP)
+		{
+			return false;
+		}
+		break;
+	case LEFT:
+		if (old_direction == RIGHT)
+		{
+			return false;
+		}
+		break;
+	case RIGHT:
+		if (old_direction == LEFT)
+		{
+			return false;
+		}
+		break;
+	default:
+		break;
+	}
+
+	return true;
 }

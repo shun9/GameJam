@@ -11,8 +11,9 @@
 #include "..\8\ADX2Le.h"
 #include "..\..\Sounds\GamePlaySounds.h"
 
-
+using namespace DirectX;
 using namespace std;
+using namespace SimpleMath;
 
 const int GamePlay::MAP_Y             = 3;
 const int GamePlay::MAP_X             = 8;
@@ -35,10 +36,12 @@ GamePlay::GamePlay(Microsoft::WRL::ComPtr<ID3D11Device> device
 	, m_scrollPos(0)
 	, m_numChoosed(-1)
 	, m_score(0)
+	, m_isGameOver(false)
 {	
-	//サウンドの初期化
-	ADX2Le::LoadAcb("Sounds\\GamePlaySounds.acb", "Sounds\\GamePlaySounds.awb");
-	ADX2Le::Play(CRI_GAMEPLAYSOUNDS__CUE_ID_1);
+
+	m_spriteBatch = std::make_unique<SpriteBatch>(m_context.Get());
+	CreateWICTextureFromFile(device.Get(), L"Resources\\Result.png", nullptr, m_result.ReleaseAndGetAddressOf());
+	CreateWICTextureFromFile(device.Get(), L"Resources\\BacktoTitle.png", nullptr, m_result2.ReleaseAndGetAddressOf());
 
 	//次のシーン
 	m_next = PLAY;
@@ -51,6 +54,10 @@ GamePlay::GamePlay(Microsoft::WRL::ComPtr<ID3D11Device> device
 
 	//選択肢の作成
 	CreateOption();
+
+	//座標設定
+	m_resultPos.x = float(0);
+	m_resultPos.y = float(0);
 
 	m_player = new Player(MAP_POS_X+Panel::SIZE,
 						  MAP_POS_Y+Panel::SIZE,
@@ -80,6 +87,10 @@ void GamePlay::Update()
 {
 	//マウス更新
 	m_mouse->Update();
+	
+	//ゲーム進行中の処理
+	if (!m_isGameOver)
+	{
 
 	//マウスの座標を更新 間に挟むため半分ずらす
 	m_mousePosX = (m_mouse->GetPosX() + m_scrollPos+ (Panel::SIZE / 2) - MAP_POS_X) / Panel::SIZE ;
@@ -94,6 +105,15 @@ void GamePlay::Update()
 	//プレイヤーの更新
 	UpdatePlayer();
 
+	//ゲームオーバー判定
+	m_isGameOver = IsDead();
+	}
+
+	//ゲームオーバー中の処理
+	if (m_isGameOver)
+	{
+		GameOver();
+	}
 }
 
 //＋ーーーーーーーーーーーーーー＋
@@ -111,6 +131,14 @@ void GamePlay::Render()
 
 	//プレイヤー描画
 	m_player->Render();
+
+	if (m_isGameOver)
+	{
+		m_spriteBatch->Begin();
+		m_spriteBatch->Draw(m_result.Get(), Vector2(100.0f, 50.0f), nullptr, Colors::White, 0.f, m_resultPos);
+		m_spriteBatch->Draw(m_result2.Get(), Vector2(190.0f, 450.0f), nullptr, Colors::White, 0.f, m_resultPos2);
+		m_spriteBatch->End();
+	}
 }
 
 //＋ーーーーーーーーーーーーーー＋
@@ -245,13 +273,37 @@ void GamePlay::PanelSlide()
 	LinkPanel();
 }
 
-void GamePlay::CheckGame()
+//＋ーーーーーーーーーーーーーー＋
+//｜機能  :ゲームオーバー判定
+//｜引数  :なし(void)
+//｜戻り値:ゲームオーバーでtrue(bool)
+//＋ーーーーーーーーーーーーーー＋
+bool GamePlay::IsDead()
 {
+	DirectX::SimpleMath::Vector2 pos = m_player->getPos();
+
+	//画面左端、上端、下端に出たらゲームオーバー
+	if (pos.x < -Panel::SIZE / 2
+	||  pos.y < -Panel::SIZE / 2 + MAP_POS_Y
+	||  pos.y >  Panel::SIZE * MAP_Y + Panel::SIZE / 2)
+	{
+		ADX2Le::Play(CRI_GAMEPLAYSOUNDS_FALL);
+		return true;
+	}
+
+	return false;
 }
 
 void GamePlay::GameOver()
 {
-	m_next = TITLE;
+	if (m_mouse->IsClickedLeft())
+	{
+		if (m_next != PLAY)
+		{
+			ADX2Le::Play(CRI_GAMEPLAYSOUNDS__CUE_ID_4);
+		}
+		m_next = TITLE;
+	}
 }
 
 //＋ーーーーーーーーーーーーーー＋
