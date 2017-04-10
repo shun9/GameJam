@@ -8,9 +8,7 @@
 #include "GameScene.h"
 #include "SpriteBatch.h"
 #include "..\8\Panel.h"
-
 #include "../8/MouseManager.h"
-
 #include "../20/Player.h"
 
 struct OPTION
@@ -58,22 +56,19 @@ private:
 	int m_mousePosX;
 	int m_mousePosY;
 
-	//スコア
-	int m_score;
-
-	//ゲームオーバーフラグ
-	bool m_isGameOver;
-
 	//デバイス関連
 	Microsoft::WRL::ComPtr<ID3D11Device> m_device;
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> m_context;
 
-	//画像データ
-	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_texture;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_result;
+	//スプライト描画
+	std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;
+	DirectX::SimpleMath::Vector2 m_resultorigin;
 
-	//スプライト描画に必須
-	std::unique_ptr<DirectX::SpriteBatch> m_sprite;
+	//スコア
+	int m_score;
 
+	bool m_isGameover;
 
 	/*--メンバ関数--*/
 public:
@@ -93,7 +88,7 @@ private:
 	//ゲームシステム関連
 	void FitOption();
 	void PanelSlide();
-	bool IsDead();
+	void CheckGame();
 	void GameOver();
 	
 	//選んだ選択肢を取得する

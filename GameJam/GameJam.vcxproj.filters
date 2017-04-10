@@ -1,83 +1,81 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Assets">
-      <UniqueIdentifier>13ecb2e6-20d8-4ec4-8773-b3dd73423ca3</UniqueIdentifier>
-      <Extensions>ico;cur;bmp;dds;dlg;fbx;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tga;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Classes">
-      <UniqueIdentifier>{0f44847d-f45a-4dec-8b09-c6fd4f8a3019}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\8">
-      <UniqueIdentifier>{90fb4461-5460-4a54-b6a3-20ddd0d3859d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\21">
-      <UniqueIdentifier>{45bb07b6-2b15-4191-a6b8-a77706bce715}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\20">
-      <UniqueIdentifier>{ae9aeb4c-7605-4ebc-8a2e-e563390677ca}</UniqueIdentifier>
-    </Filter>
+    <Manifest Include="settings.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="StepTimer.h" />
-    <ClInclude Include="Classes\8\Panel.h">
-      <Filter>Classes\8</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\21\GamePlay.h">
-      <Filter>Classes\21</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\21\GameScene.h">
-      <Filter>Classes\21</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\21\GameTitle.h">
-      <Filter>Classes\21</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\8\MouseManager.h">
-      <Filter>Classes\8</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\8\ADX2Le.h">
-      <Filter>Classes\8</Filter>
-    </ClInclude>
-    <ClInclude Include="Classes\20\Player.h">
-      <Filter>Classes\20</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="pch.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Classes\8\MouseManager.cpp">
+      <Filter>8</Filter>
+    </ClCompile>
     <ClCompile Include="Classes\8\Panel.cpp">
-      <Filter>Classes\8</Filter>
+      <Filter>8</Filter>
     </ClCompile>
     <ClCompile Include="Classes\21\GamePlay.cpp">
-      <Filter>Classes\21</Filter>
+      <Filter>21</Filter>
     </ClCompile>
     <ClCompile Include="Classes\21\GameTitle.cpp">
-      <Filter>Classes\21</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\8\MouseManager.cpp">
-      <Filter>Classes\8</Filter>
+      <Filter>21</Filter>
     </ClCompile>
     <ClCompile Include="Classes\8\ADX2Le.cpp">
-      <Filter>Classes\8</Filter>
+      <Filter>8</Filter>
     </ClCompile>
     <ClCompile Include="Classes\20\Player.cpp">
-      <Filter>Classes\20</Filter>
+      <Filter>20</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="StepTimer.h" />
+    <ClInclude Include="Classes\8\MouseManager.h">
+      <Filter>8</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\8\Panel.h">
+      <Filter>8</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\21\GamePlay.h">
+      <Filter>21</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\21\GameScene.h">
+      <Filter>21</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\21\GameTitle.h">
+      <Filter>21</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\8\ADX2Le.h">
+      <Filter>8</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\20\Player.h">
+      <Filter>20</Filter>
+    </ClInclude>
+    <ClInclude Include="Sounds\GamePlaySounds.h">
+      <Filter>sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Sounds\GameJam_acf.h">
+      <Filter>sound</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="directx.ico">
-      <Filter>Assets</Filter>
-    </Image>
+    <Image Include="directx.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Manifest Include="settings.manifest">
-      <Filter>Assets</Filter>
-    </Manifest>
+    <Filter Include="8">
+      <UniqueIdentifier>{55e6a288-7de5-424e-b0a0-f703b5b65211}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="20">
+      <UniqueIdentifier>{fe32fefc-c5da-414b-9984-964428725ca5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="21">
+      <UniqueIdentifier>{7e839315-f3fd-4def-bcf9-4f880125c172}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sound">
+      <UniqueIdentifier>{1775472e-245c-4336-a7f9-7599716c230d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
