@@ -41,9 +41,6 @@ GamePlay::GamePlay(Microsoft::WRL::ComPtr<ID3D11Device> device
 	ADX2Le::LoadAcb("Sounds\\GamePlaySounds.acb", "Sounds\\GamePlaySounds.awb");
 	ADX2Le::Play(CRI_GAMEPLAYSOUNDS__CUE_ID_1);
 
-	m_spriteBatch = std::make_unique<SpriteBatch>(context.Get());
-	CreateWICTextureFromFile(device.Get(), L"Resources\\title.png", nullptr, m_background.ReleaseAndGetAddressOf());
-
 	//ŽŸ‚ÌƒV[ƒ“
 	m_next = PLAY;
 
@@ -135,10 +132,6 @@ void GamePlay::Render()
 
 	if (m_isGameOver)
 	{
-		m_spriteBatch->Begin();
-		m_spriteBatch->Draw(m_button.Get(), Vector2(m_fullscreenRect.right / 4.0f, m_fullscreenRect.bottom / 1.5f),
-			nullptr, Colors::White, 0.f, m_buttonorigin);
-		m_spriteBatch->End();
 	}
 }
 
