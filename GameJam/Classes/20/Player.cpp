@@ -207,3 +207,44 @@ void Player::changeTexture()
 		}
 	}
 }
+
+//----------------------------------------------------------------------
+//! @brief プレイヤーを強制的に移動させる関数
+//!
+//! @param[in] なし
+//!
+//! @return なし
+//----------------------------------------------------------------------
+void Player::compelMove()
+{
+	//動いていない状態なら
+	if (m_state == false)
+	{
+		return;
+	}
+	//歩いた距離がパネル半個分より小さいなら移動させる
+	else if (128 - m_work_num * 2 > 64)
+	{
+		if (m_direction == TOP)
+		{
+
+		}
+		else if (m_direction == BOTTOM)
+		{
+
+		}
+		else if (m_direction == RIGHT)
+		{
+
+		}
+		else if (m_direction == LEFT)
+		{
+
+		}
+		else
+		{
+			return;
+		}
+	}
+
+}

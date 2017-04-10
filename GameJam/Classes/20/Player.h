@@ -27,6 +27,7 @@ private:
 	int isWork(int direction);			//プレイヤーがどの方向に動けるかを返す関数
 	void work();						//プレイヤーを動かす関数
 	void changeTexture();				//プレイヤーの画像を変更する関数
+	void compelMove();					//プレイヤーを強制的に移動させる関数
 
 public:
 	Player(float x, float y);
