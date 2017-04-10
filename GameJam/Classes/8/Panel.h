@@ -1,7 +1,7 @@
 //************************************************/
 //* @file  :Pamel.h
 //* @brief :道パネルのヘッダー
-//* @date  :2017/04/07
+//* @date  :2017/04/09
 //* @author:S.Katou
 //************************************************/
 #pragma once
@@ -26,6 +26,7 @@ struct PanelPass
 	bool bottom;
 	bool left;
 	bool right;
+	wchar_t* path;
 };
 
 //パネルクラス
@@ -34,16 +35,22 @@ class Panel
 	/*--静的変数--*/
 public:
 	//１辺の大きさ
-	static int SIZE;
+	static const int SIZE;
+	static const int MAX_PASS_NUM;
 
 	//パスの一覧
-	static PanelPass passTopRight;
-	static PanelPass passTopLeft;
-	static PanelPass passBottomRight;
-	static PanelPass passBottomLeft;
-	static PanelPass passRightLeft;
-	static PanelPass passTopBottom;
-	static PanelPass passNone;
+	static const PanelPass passTopRight;
+	static const PanelPass passTopLeft;
+	static const PanelPass passBottomRight;
+	static const PanelPass passBottomLeft;
+	static const PanelPass passRightLeft;
+	static const PanelPass passTopBottom;
+	static const PanelPass passNone;
+
+	/*--静的関数--*/
+public:
+	//ランダムなパネルのパスを返す
+	static PanelPass GetRandomPass();
 
 
 	/*--変数--*/
@@ -67,7 +74,6 @@ public:
 	//コンストラクタ
 	Panel(Microsoft::WRL::ComPtr<ID3D11Device> device
 		, Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContext
-		, const wchar_t* path
 		, const PanelPass& pass);
 
 

@@ -20,7 +20,6 @@ class Game
 private:
 
 public:
-	int a;
 	int m_Scene;
 
     Game();

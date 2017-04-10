@@ -1,0 +1,19 @@
+diff a/GameJam/Game.cpp b/GameJam/Game.cpp	(rejected hunks)
+@@ -7,6 +7,7 @@
+ #include "Classes\21\GamePlay.h"
+ #include "Classes\21\GameTitle.h"
+ 
++
+ extern void ExitGame();
+ 
+ using namespace DirectX;
+@@ -111,9 +112,6 @@
+     // TODO: Add your rendering code here.
+ 	//�������牺�ɋL�q
+ 
+-
+-
+-
+ 	//���������ɋL�q
+ 	Present();
+ }

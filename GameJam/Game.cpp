@@ -7,7 +7,6 @@
 #include "Classes\21\GamePlay.h"
 #include "Classes\21\GameTitle.h"
 
-
 extern void ExitGame();
 
 using namespace DirectX;
@@ -27,6 +26,7 @@ Game::Game() :
 Game::~Game()
 {
 	delete m_GameScene;
+
 }
 
 // Initialize the Direct3D resources required to run.
@@ -113,6 +113,7 @@ void Game::Render()
 
     // TODO: Add your rendering code here.
 	//ここから下に記述
+
 
 	//ここから上に記述
 	Present();
