@@ -9,7 +9,7 @@
 #include "SpriteBatch.h"
 #include "WICTextureLoader.h"
 #include <wrl.h>
-#include "..\8\Panel.h"
+#include "../8/Panel.h"
 
 class Player
 {
@@ -27,7 +27,7 @@ private:
 	int isWork(int direction);			//プレイヤーがどの方向に動けるかを返す関数
 	void work();						//プレイヤーを動かす関数
 	void changeTexture();				//プレイヤーの画像を変更する関数
-
+	void compelMove();					//プレイヤーを強制的に移動させる関数
 
 	Microsoft::WRL::ComPtr<ID3D11Device> m_device;
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> m_deviceContext;
@@ -43,4 +43,5 @@ public:
 	void registerPanel(Panel* panel);	//プレイヤーの位置にあるパネルを登録する関数
 
 	DirectX::SimpleMath::Vector2 getPos() { return m_pos; }
+
 };
