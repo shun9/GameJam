@@ -59,6 +59,7 @@ Player::~Player()
 void Player::Update()
 {
 	work();
+	m_pos.x -= 0.1f;
 }
 
 //----------------------------------------------------------------------
@@ -87,17 +88,13 @@ void Player::Render()
 int Player::isWork(int direction)
 {
 	//パネルの情報が入っていなければその状態を返す
-	if (m_panel == nullptr)
-	{
-		return 5;
-	}
-	else if (m_panel->CanPass(direction))
+	if (m_panel->CanPass(direction) == true)
 	{
 		return direction;
 	}
 	else
 	{
-		return 5;
+		return 4;
 	}
 }
 
@@ -114,14 +111,14 @@ void Player::work()
 	if (m_state == false)
 	{
 		//動けるかどうかを確認
-		for (int direction = 0; direction < 6; direction++)
+		for (int direction = 0; direction < 4; direction++)
 		{
-			if (isWork(direction))
+			if (isWork(direction) < 4)
 			{
 				m_state = true;
 				m_direction = direction;
 			}
-			else
+			else if (isWork(direction) == 4)
 			{
 				m_state = false;
 			}
@@ -147,9 +144,13 @@ void Player::work()
 			m_pos.x -= 2;
 			m_work_num++;
 		}
-		else if (m_direction == BOTTOM)
+		else if (m_direction == RIGHT)
 		{
 			m_pos.x += 2;
+			m_work_num++;
+		}
+		else
+		{
 			m_work_num++;
 		}
 	}
@@ -206,4 +207,45 @@ void Player::changeTexture()
 			}
 		}
 	}
+}
+
+//----------------------------------------------------------------------
+//! @brief プレイヤーを強制的に移動させる関数
+//!
+//! @param[in] なし
+//!
+//! @return なし
+//----------------------------------------------------------------------
+void Player::compelMove()
+{
+	//動いていない状態なら
+	if (m_state == false)
+	{
+		return;
+	}
+	//歩いた距離がパネル半個分より小さいなら移動させる
+	else if (128 - m_work_num * 2 > 64)
+	{
+		if (m_direction == TOP)
+		{
+
+		}
+		else if (m_direction == BOTTOM)
+		{
+
+		}
+		else if (m_direction == RIGHT)
+		{
+
+		}
+		else if (m_direction == LEFT)
+		{
+
+		}
+		else
+		{
+			return;
+		}
+	}
+
 }

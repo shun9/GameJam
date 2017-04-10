@@ -35,14 +35,10 @@ GamePlay::GamePlay(Microsoft::WRL::ComPtr<ID3D11Device> device
 	, m_scrollPos(0)
 	, m_numChoosed(-1)
 	, m_score(0)
-	, m_isGameOver(false)
 {	
 	//サウンドの初期化
 	ADX2Le::LoadAcb("Sounds\\GamePlaySounds.acb", "Sounds\\GamePlaySounds.awb");
 	ADX2Le::Play(CRI_GAMEPLAYSOUNDS__CUE_ID_1);
-
-	m_spriteBatch = std::make_unique<SpriteBatch>(context.Get());
-	CreateWICTextureFromFile(device.Get(), L"Resources\\title.png", nullptr, m_background.ReleaseAndGetAddressOf());
 
 	//次のシーン
 	m_next = PLAY;
@@ -82,9 +78,6 @@ GamePlay::~GamePlay()
 //＋ーーーーーーーーーーーーーー＋
 void GamePlay::Update()
 {
-	//ゲーム進行中の処理
-	if (!m_isGameOver)
-	{
 	//マウス更新
 	m_mouse->Update();
 
@@ -95,26 +88,12 @@ void GamePlay::Update()
 	//ステージ移動
 	UpdateStage();
 
-	if (m_isGameOver)
-	{
-		GameOver();
-		return;
-	}
 	//選択肢の更新
 	UpdateOption();
 
 	//プレイヤーの更新
 	UpdatePlayer();
 
-	//ゲームオーバー判定
-	m_isGameOver = IsDead();
-	}
-
-	//ゲームオーバー中の処理
-	if (m_isGameOver)
-	{
-		GameOver();
-	}
 }
 
 //＋ーーーーーーーーーーーーーー＋
@@ -132,14 +111,6 @@ void GamePlay::Render()
 
 	//プレイヤー描画
 	m_player->Render();
-
-	if (m_isGameOver)
-	{
-		m_spriteBatch->Begin();
-		m_spriteBatch->Draw(m_button.Get(), Vector2(m_fullscreenRect.right / 4.0f, m_fullscreenRect.bottom / 1.5f),
-			nullptr, Colors::White, 0.f, m_buttonorigin);
-		m_spriteBatch->End();
-	}
 }
 
 //＋ーーーーーーーーーーーーーー＋
@@ -274,33 +245,13 @@ void GamePlay::PanelSlide()
 	LinkPanel();
 }
 
-//＋ーーーーーーーーーーーーーー＋
-//｜機能  :ゲームオーバー判定
-//｜引数  :なし(void)
-//｜戻り値:ゲームオーバーでtrue(bool)
-//＋ーーーーーーーーーーーーーー＋
-bool GamePlay::IsDead()
+void GamePlay::CheckGame()
 {
-	DirectX::SimpleMath::Vector2 pos = m_player->getPos();
-
-	//画面左端、上端、下端に出たらゲームオーバー
-	if (pos.x < -Panel::SIZE / 2
-	||  pos.y < -Panel::SIZE / 2 + MAP_POS_Y
-	||  pos.y >  Panel::SIZE * MAP_Y + Panel::SIZE / 2)
-	{
-		return true;
-	}
-	return 0;
-
-	return false;
 }
 
 void GamePlay::GameOver()
 {
-	if (m_mouse->IsClickedLeft())
-	{
-		m_next = TITLE;
-	}
+	m_next = TITLE;
 }
 
 //＋ーーーーーーーーーーーーーー＋
