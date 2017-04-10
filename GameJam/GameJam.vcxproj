@@ -90,7 +90,6 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <AdditionalIncludeDirectories>C:\DirectXTK\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -127,16 +126,13 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <FloatingPointModel>Fast</FloatingPointModel>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>C:\DirectXTK\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>DirectXTK.lib;d3d11.lib;dxguid.lib;uuid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\DirectXTK\Bin\Desktop_2015\Win32\Release</AdditionalLibraryDirectories>
+      <AdditionalDependencies>d3d11.lib;dxguid.lib;uuid.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -163,6 +159,7 @@
     <ClInclude Include="Classes\21\GamePlay.h" />
     <ClInclude Include="Classes\21\GameScene.h" />
     <ClInclude Include="Classes\21\GameTitle.h" />
+    <ClInclude Include="Classes\8\ADX2Le.h" />
     <ClInclude Include="Classes\8\MouseManager.h" />
     <ClInclude Include="Classes\8\Panel.h" />
     <ClInclude Include="Game.h" />
@@ -172,10 +169,7 @@
   <ItemGroup>
     <ClCompile Include="Classes\21\GamePlay.cpp" />
     <ClCompile Include="Classes\21\GameTitle.cpp" />
-<<<<<<< HEAD
     <ClCompile Include="Classes\8\ADX2Le.cpp" />
-=======
->>>>>>> 904c7b17d5e2b6a14be1d5a084a2559150156735
     <ClCompile Include="Classes\8\MouseManager.cpp" />
     <ClCompile Include="Classes\8\Panel.cpp" />
     <ClCompile Include="Game.cpp" />
