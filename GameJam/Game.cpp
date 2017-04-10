@@ -81,7 +81,7 @@ void Game::Update(DX::StepTimer const& timer)
 		{
 		case TITLE:m_GameScene = new GameTitle(m_d3dDevice, m_d3dContext);
 			break;
-		case PLAY:m_GameScene = new GamePlay();
+		case PLAY:m_GameScene = new GamePlay(m_d3dDevice, m_d3dContext);
 			break;
 		}
 	}
