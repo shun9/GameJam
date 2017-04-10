@@ -9,7 +9,7 @@
 #include "SpriteBatch.h"
 #include "WICTextureLoader.h"
 #include <wrl.h>
-#include <..\..\Users\s162188\Documents\GameJam\GameJam\Classes\8\Panel.h>
+#include "../8/Panel.h"
 
 class Player
 {
@@ -29,10 +29,18 @@ private:
 	void changeTexture();				//プレイヤーの画像を変更する関数
 	void compelMove();					//プレイヤーを強制的に移動させる関数
 
+	Microsoft::WRL::ComPtr<ID3D11Device> m_device;
+	Microsoft::WRL::ComPtr<ID3D11DeviceContext> m_deviceContext;
+
 public:
-	Player(float x, float y);
+	Player(float x, float y,
+		Microsoft::WRL::ComPtr<ID3D11Device> device,
+		Microsoft::WRL::ComPtr<ID3D11DeviceContext> context);
+
 	~Player();
 	void Update();
 	void Render();
 	void registerPanel(Panel* panel);	//プレイヤーの位置にあるパネルを登録する関数
+
+	DirectX::SimpleMath::Vector2 getPos() { return m_pos; }
 };
