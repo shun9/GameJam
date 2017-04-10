@@ -45,9 +45,6 @@ void Game::Initialize(HWND window, int width, int height)
 
 	m_Scene = TITLE;
 	m_GameScene = new GameTitle();
-
-	m_mouse = std::make_unique<Mouse>();
-	m_mouse->SetWindow(window);
 }
 
 // Executes the basic game loop.

@@ -10,6 +10,8 @@
 GameTitle::GameTitle()
 {
 	m_next = TITLE;
+	m_mouse = MouseManager::GetInstance();
+
 }
 
 GameTitle::~GameTitle()
@@ -18,8 +20,8 @@ GameTitle::~GameTitle()
 
 void GameTitle::Update()
 {
-	auto state = m_mouse->GetState();
-	if (state.leftButton)
+	m_mouse->Update();
+	if (m_mouse->IsClickedLeft())
 	{
 		m_next = PLAY;
 	}
