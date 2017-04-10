@@ -39,8 +39,6 @@ public:
 	void Update();
 	void Render();
 
-	void SetPanel(int x, int y);
-	PanelPass SetType(int type);
 	void StageMove();
 	void PaneFit();
 	void PanelSlide();

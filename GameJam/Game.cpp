@@ -39,8 +39,6 @@ void Game::Initialize(HWND window, int width, int height)
 	m_timer.SetFixedTimeStep(true);
 	m_timer.SetTargetElapsedSeconds(1.0 / 60);
 
-	srand(static_cast<unsigned int>(NULL));
-
     CreateDevice();
 
     CreateResources();
