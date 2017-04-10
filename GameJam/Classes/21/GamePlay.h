@@ -1,13 +1,25 @@
+//--------------------------------------------------------------------------------------
+// File: GamePlay.h
+// Date: 2017.04.07
+// Author: Syuto Yamada
+//--------------------------------------------------------------------------------------
+
 #pragma once
 
-#include"..\..\StepTimer.h"
+#include "..\..\StepTimer.h"
+#include "..\..\Game.h"
+#include "GameScene.h"
 #include "..\8\Panel.h"
 
-class GamePlay : public Game
+class GamePlay : public GameScene
 {
 private:
-	Panel m_panel;
-//	Player m_player;
+	Panel* m_panel[3][7];
+
+	std::unique_ptr<DirectX::Mouse> m_mouse;
+	Microsoft::WRL::ComPtr<ID3D11Device>  m_d3dDevice;
+	Microsoft::WRL::ComPtr<ID3D11DeviceContext>     m_d3dContext;
+	DX::StepTimer                                   m_timer;
 
 public:
 	GamePlay();
@@ -15,4 +27,10 @@ public:
 
 	void Update();
 	void Render();
+
+	void StageMove();
+	void PaneFit();
+	void PanelSlide();
+	void CheckGame();
+	void GameOver();
 };

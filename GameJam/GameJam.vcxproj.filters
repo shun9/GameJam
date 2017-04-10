@@ -25,6 +25,15 @@
     <ClInclude Include="Classes\21\GamePlay.h">
       <Filter>Classes\21</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\21\GameScene.h">
+      <Filter>Classes\21</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\21\GameTitle.h">
+      <Filter>Classes\21</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\8\MouseManager.h">
+      <Filter>Classes\8</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
@@ -35,6 +44,12 @@
     </ClCompile>
     <ClCompile Include="Classes\21\GamePlay.cpp">
       <Filter>Classes\21</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\21\GameTitle.cpp">
+      <Filter>Classes\21</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\8\MouseManager.cpp">
+      <Filter>Classes\8</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
