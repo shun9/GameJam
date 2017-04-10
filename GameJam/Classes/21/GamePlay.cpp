@@ -35,10 +35,8 @@ GamePlay::GamePlay(Microsoft::WRL::ComPtr<ID3D11Device> device
 	, m_scrollPos(0)
 	, m_numChoosed(-1)
 	, m_score(0)
+	, m_isGameOver(false)
 {	
-	//サウンドの初期化
-	ADX2Le::LoadAcb("Sounds\\GamePlaySounds.acb", "Sounds\\GamePlaySounds.awb");
-	ADX2Le::Play(CRI_GAMEPLAYSOUNDS__CUE_ID_1);
 
 	//次のシーン
 	m_next = PLAY;
@@ -80,6 +78,10 @@ void GamePlay::Update()
 {
 	//マウス更新
 	m_mouse->Update();
+	
+	//ゲーム進行中の処理
+	if (!m_isGameOver)
+	{
 
 	//マウスの座標を更新 間に挟むため半分ずらす
 	m_mousePosX = (m_mouse->GetPosX() + m_scrollPos+ (Panel::SIZE / 2) - MAP_POS_X) / Panel::SIZE ;
@@ -94,6 +96,15 @@ void GamePlay::Update()
 	//プレイヤーの更新
 	UpdatePlayer();
 
+	//ゲームオーバー判定
+	m_isGameOver = IsDead();
+	}
+
+	//ゲームオーバー中の処理
+	if (m_isGameOver)
+	{
+		GameOver();
+	}
 }
 
 //＋ーーーーーーーーーーーーーー＋
@@ -245,8 +256,25 @@ void GamePlay::PanelSlide()
 	LinkPanel();
 }
 
-void GamePlay::CheckGame()
+//＋ーーーーーーーーーーーーーー＋
+//｜機能  :ゲームオーバー判定
+//｜引数  :なし(void)
+//｜戻り値:ゲームオーバーでtrue(bool)
+//＋ーーーーーーーーーーーーーー＋
+bool GamePlay::IsDead()
 {
+	DirectX::SimpleMath::Vector2 pos = m_player->getPos();
+
+	//画面左端、上端、下端に出たらゲームオーバー
+	if (pos.x < -Panel::SIZE / 2
+	||  pos.y < -Panel::SIZE / 2 + MAP_POS_Y
+	||  pos.y >  Panel::SIZE * MAP_Y + Panel::SIZE / 2)
+	{
+		ADX2Le::Play(CRI_GAMEPLAYSOUNDS_FALL);
+		return true;
+	}
+
+	return false;
 }
 
 void GamePlay::GameOver()

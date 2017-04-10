@@ -87,7 +87,7 @@ void Player::Render()
 //----------------------------------------------------------------------
 int Player::isWork(int direction)
 {
-	//ƒpƒlƒ‹‚Ìî•ñ‚ª“ü‚Á‚Ä‚¢‚È‚¯‚ê‚Î‚»‚Ìó‘Ô‚ð•Ô‚·
+	//i‚ß‚é‚È‚ç‚»‚Ì•ûŒü‚ð•Ô‚·
 	if (m_panel->CanPass(direction) == true)
 	{
 		return direction;

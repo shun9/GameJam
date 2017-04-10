@@ -48,11 +48,12 @@ void Game::Initialize(HWND window, int width, int height)
 
     CreateResources();
 
-	m_Scene = TITLE;
-	m_GameScene = new GameTitle(m_d3dDevice, m_d3dContext);
 	//ÉTÉEÉìÉhÇÃèâä˙âª
 	ADX2Le::Initialize("Sounds\\GameJam.acf");
 	ADX2Le::LoadAcb("Sounds\\GamePlaySounds.acb", "Sounds\\GamePlaySounds.awb");
+
+	m_Scene = TITLE;
+	m_GameScene = new GameTitle(m_d3dDevice, m_d3dContext);
 
 	m_play = new GamePlay(m_d3dDevice,m_d3dContext);
 }
@@ -93,7 +94,8 @@ void Game::Update(DX::StepTimer const& timer)
 		{
 		case TITLE:m_GameScene = new GameTitle(m_d3dDevice, m_d3dContext);
 			break;
-		case PLAY:m_GameScene = new GamePlay(m_d3dDevice, m_d3dContext);
+		case PLAY:
+			m_GameScene = new GamePlay(m_d3dDevice, m_d3dContext);
 			break;
 		}
 	}

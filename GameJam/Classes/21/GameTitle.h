@@ -25,6 +25,8 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_background;
 	//スプライト描画
 	std::unique_ptr<DirectX::SpriteBatch> m_spriteBatch;
+
+	//座標
 	DirectX::SimpleMath::Vector2 m_screenPos;
 	DirectX::SimpleMath::Vector2 m_origin;
 
