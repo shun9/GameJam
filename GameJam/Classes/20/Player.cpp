@@ -111,7 +111,7 @@ void Player::work()
 	if (m_state == false)
 	{
 		//動けるかどうかを確認
-		for (int direction = 0; direction < 4; direction++)
+		for (int direction = 3; direction > -1; direction--)
 		{
 			if (isWork(direction) < 4)
 			{
@@ -170,7 +170,7 @@ void Player::work()
 }
 
 //----------------------------------------------------------------------
-//! @brief プレイヤーの位置にあるパネルと前回乗っていたパネルを登録する関数
+//! @brief プレイヤーの位置にあるパネルを登録する関数
 //!
 //! @param[in] なし
 //!
