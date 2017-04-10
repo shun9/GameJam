@@ -9,7 +9,7 @@
 #include "SpriteBatch.h"
 #include "WICTextureLoader.h"
 #include <wrl.h>
-#include <..\..\Users\s162188\Documents\GameJam\GameJam\Classes\8\Panel.h>
+#include "..\8\Panel.h"
 
 class Player
 {

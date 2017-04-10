@@ -8,7 +8,7 @@
 #include <vector>
 #include "GameScene.h"
 #include "..\8\Panel.h"
-#include "../8/MouseManager.h"
+#include "..\8\MouseManager.h"
 
 struct OPTION
 {

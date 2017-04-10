@@ -8,8 +8,8 @@
 #include "..\..\Game.h"
 #include "GamePlay.h"
 
-#include "../8/ADX2Le.h"
-#include "../../Sounds/GamePlaySounds.h"
+#include "..\8\ADX2Le.h"
+#include "..\..\Sounds\GamePlaySounds.h"
 
 
 using namespace std;

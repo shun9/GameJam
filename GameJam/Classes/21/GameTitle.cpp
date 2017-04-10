@@ -27,8 +27,8 @@ GameTitle::GameTitle(Microsoft::WRL::ComPtr<ID3D11Device> device
 
 	m_fullscreenRect.left = 0;
 	m_fullscreenRect.top = 0;
-	m_fullscreenRect.right = 640;
-	m_fullscreenRect.bottom = 480;
+	m_fullscreenRect.right = 800;
+	m_fullscreenRect.bottom = 600;
 }
 
 GameTitle::~GameTitle()
@@ -39,7 +39,11 @@ GameTitle::~GameTitle()
 
 void GameTitle::Update()
 {
-
+	m_mouse->Update();
+	if (m_mouse->IsClickedLeft())
+	{
+		m_next = PLAY;
+	}
 }
 
 void GameTitle::Render()
