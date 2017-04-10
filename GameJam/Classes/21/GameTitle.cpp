@@ -16,7 +16,8 @@ GameTitle::GameTitle(Microsoft::WRL::ComPtr<ID3D11Device> device
 	, Microsoft::WRL::ComPtr<ID3D11DeviceContext> deviceContext)
 {
 	//BGMçƒê∂
-	ADX2Le::Play(CRI_GAMEPLAYSOUNDS__CUE_ID_1);
+	ADX2Le::LoadAcb("Sounds\\GamePlaySounds.acb", "Sounds\\GamePlaySounds.awb");
+	ADX2Le::Play(CRI_GAMEPLAYSOUNDS__CUE_ID_5);
 
 	m_next = TITLE;
 
