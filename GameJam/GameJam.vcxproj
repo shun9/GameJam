@@ -90,6 +90,7 @@
       <FloatingPointModel>Fast</FloatingPointModel>
       <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <AdditionalIncludeDirectories>C:\DirectXTK\Inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -165,6 +166,8 @@
     <ClInclude Include="Classes\8\Panel.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Sounds\GameJam_acf.h" />
+    <ClInclude Include="Sounds\GamePlaySounds.h" />
     <ClInclude Include="StepTimer.h" />
   </ItemGroup>
   <ItemGroup>
